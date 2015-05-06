@@ -1,30 +1,33 @@
 <!DOCTYPE html>
 <html lang="en" ng-app="ryanWeb">
 <head>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>Ryan Web</title>
-  <meta name="description" content="">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Ryan Web</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-  <link rel="stylesheet" href="bower_components/semantic-ui/dist/semantic.min.css">
-  <link rel="stylesheet" href="app.css">
+    <link rel="stylesheet" href="bower_components/semantic-ui/dist/semantic.min.css">
+    <link rel="stylesheet" href="css/margin.padding.css">
 
-  <script src="bower_components/angular/angular.min.js"></script>
-  <script src="bower_components/angular-route/angular-route.min.js"></script>
-  <script src="bower_components/jquery/dist/jquery.min.js"></script>
-  <script src="bower_components/semantic-ui/dist/semantic.min.js"></script>
+    <script src="bower_components/angular/angular.min.js"></script>
+    <script src="bower_components/angular-route/angular-route.min.js"></script>
+    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="bower_components/semantic-ui/dist/semantic.min.js"></script>
 
-  <script src="app.js"></script>
+    <script src="app.js"></script>
+    <script src="components/shoppingList/shopping.list.js"></script>
+    <script src="components/shoppingList/shopping.list.service.js"></script>
 </head>
 
 <body>
-  <ul class="menu">
-    <li><a href="#/home">home</a></li>
-    <li><a href="#/view1">view1</a></li>
-    <li><a href="#/view2">view2</a></li>
-  </ul>
-
-  <div ng-view></div>
+    <div class="p">
+        <div class="ui blue menu inverted">
+            <a class="item" href="#/home">home</a>
+            <a class="item" href="#/view1">view1</a>
+            <a class="item" href="#/view2">view2</a>
+        </div>
+        <div ng-view></div>
+    </div>
 </body>
 </html>
