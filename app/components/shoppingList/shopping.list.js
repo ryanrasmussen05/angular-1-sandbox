@@ -41,7 +41,7 @@ angular.module('ryanWeb').directive('shoppingList', function() {
                 }, function(error) {
                     //handle error
                 });
-            }
+            };
         }
     };
 });
