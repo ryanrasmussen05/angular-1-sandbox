@@ -15,20 +15,23 @@ angular.module('ryanWeb').directive('canvasTest', function() {
             $scope.canvasTest.canvas = null;
             $scope.canvasTest.ctx = null;
 
-            $scope.canvasTest.width = 500;
-            $scope.canvasTest.height = 500;
+            $scope.canvasTest.width = $('.canvas-wrapper').width();
+            $scope.canvasTest.height = $('.canvas-wrapper').height();
 
             $scope.canvasTest.particles = [];
 
             $scope.canvasTest.init = function() {
-                $scope.canvasTest.canvas = $element[0];
+                $scope.canvasTest.canvas = $('#canvas')[0];
+                $scope.canvasTest.canvas.width = $scope.canvasTest.width;
+                $scope.canvasTest.canvas.height = $scope.canvasTest.height;
+
                 $scope.canvasTest.ctx = $scope.canvasTest.canvas.getContext('2d');
 
                 for(var i = 0; i < 50; i++) {
                     $scope.canvasTest.particles.push(new Particle());
                 }
 
-                $interval(draw, 10);
+                $interval(draw, 50);
             };
 
             function Particle() {
