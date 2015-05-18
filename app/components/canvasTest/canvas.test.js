@@ -11,6 +11,7 @@ angular.module('ryanWeb').directive('canvasTest', function() {
         },
         controller: function($scope, $element, $interval) {
             $scope.canvasTest = {};
+            $scope.canvasTest.gravity = false;
 
             $scope.canvasTest.canvas = null;
             $scope.canvasTest.ctx = null;
@@ -31,7 +32,11 @@ angular.module('ryanWeb').directive('canvasTest', function() {
                     $scope.canvasTest.particles.push(new Particle());
                 }
 
-                $interval(draw, 50);
+                $interval(draw, 30);
+            };
+
+            $scope.canvasTest.toggleGravity = function() {
+                $scope.canvasTest.gravity = !$scope.canvasTest.gravity;
             };
 
             function Particle() {
@@ -49,7 +54,7 @@ angular.module('ryanWeb').directive('canvasTest', function() {
 
             function draw() {
                 $scope.canvasTest.ctx.globalCompositeOperation = 'source-over';
-                $scope.canvasTest.ctx.fillStyle = 'rgba(0, 0, 0, 0.3)';
+                $scope.canvasTest.ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
                 $scope.canvasTest.ctx.fillRect(0, 0, $scope.canvasTest.width, $scope.canvasTest.height);
 
                 $scope.canvasTest.ctx.globalCompositeOperation = 'lighter';
@@ -61,8 +66,8 @@ angular.module('ryanWeb').directive('canvasTest', function() {
 
                     var gradient = $scope.canvasTest.ctx.createRadialGradient(particle.x, particle.y, 0, particle.x, particle.y, particle.radius);
                     gradient.addColorStop(0, 'white');
-                    gradient.addColorStop(0.4, 'white');
-                    gradient.addColorStop(0.4, particle.color);
+                    gradient.addColorStop(0.1, 'white');
+                    gradient.addColorStop(0.7, particle.color);
                     gradient.addColorStop(1, 'black');
 
                     $scope.canvasTest.ctx.fillStyle = gradient;
@@ -72,10 +77,32 @@ angular.module('ryanWeb').directive('canvasTest', function() {
                     particle.x += particle.vx;
                     particle.y += particle.vy;
 
-                    if(particle.x < -50) particle.x = $scope.canvasTest.width + 50;
-                    if(particle.y < -50) particle.y = $scope.canvasTest.height + 50;
-                    if(particle.x > $scope.canvasTest.width + 50) particle.x = -50;
-                    if(particle.y > $scope.canvasTest.height + 50) particle.y = -50;
+                    //vertical acceleration if gravity on
+                    if($scope.canvasTest.gravity) {
+                        particle.vy += 1;
+                    }
+
+                    //left right movement
+                    if(particle.x < 0 && particle.vx < 0) {
+                        particle.vx = particle.vx * -1;
+                    } else if(particle.x > $scope.canvasTest.width && particle.vx > 0) {
+                        if($scope.canvasTest.gravity) {
+                            particle.vx = particle.vx * -0.7;
+                        } else {
+                            particle.vx = particle.vx * -1;
+                        }
+                    }
+
+                    //up down movement
+                    if(particle.y < 0 && particle.vy < 0) {
+                        particle.vy = particle.vy * -1;
+                    } else if(particle.y > $scope.canvasTest.height && particle.vy > 0) {
+                        if($scope.canvasTest.gravity) {
+                            particle.vy = particle.vy * -0.8;
+                        } else {
+                            particle.vy = particle.vy * -1;
+                        }
+                    }
                 }
             }
         }

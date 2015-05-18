@@ -6,6 +6,11 @@ angular.module('ryanWeb').directive('menuBar', function() {
         replace: true,
         templateUrl: 'components/menuBar/menu.bar.html',
         scope: {},
+        link: function() {
+            $('.left.sidebar').find('.item').click(function() {
+                $('.left.sidebar').sidebar('hide');
+            });
+        },
         controller: function($scope) {
             $scope.menuBar = {};
 

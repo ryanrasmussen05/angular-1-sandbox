@@ -10,7 +10,7 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/view2', {
     templateUrl: 'views/view2.html'
   }).otherwise({
-    redirectTo: '/home'
+    redirectTo: '/view1'
   })
 }]);
 
