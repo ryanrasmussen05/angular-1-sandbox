@@ -12,7 +12,6 @@ angular.module('ryanWeb').directive('canvasTest', function() {
         controller: function($scope, $element, $interval) {
             $scope.canvasTest = {};
             $scope.canvasTest.gravity = false;
-            $scope.canvasTest.collisions = false;
 
             $scope.canvasTest.canvas = null;
             $scope.canvasTest.ctx = null;
@@ -38,10 +37,6 @@ angular.module('ryanWeb').directive('canvasTest', function() {
 
             $scope.canvasTest.toggleGravity = function() {
                 $scope.canvasTest.gravity = !$scope.canvasTest.gravity;
-            };
-
-            $scope.canvasTest.toggleCollisions = function() {
-                $scope.canvasTest.collisions = !$scope.canvasTest.collisions;
             };
 
             function Particle() {
@@ -109,53 +104,6 @@ angular.module('ryanWeb').directive('canvasTest', function() {
                             particle.vy = particle.vy * -0.8;
                         } else {
                             particle.vy = particle.vy * -1;
-                        }
-                    }
-                }
-
-                if($scope.canvasTest.collisions) {
-                    calculateCollisions();
-                }
-            }
-
-            function calculateCollisions() {
-                for(var t = 0; t < $scope.canvasTest.particles.length; t++) {
-
-                    var firstBall = $scope.canvasTest.particles[t];
-
-                    for (var u = t + 1; u < $scope.canvasTest.particles.length; u++) {
-                        var secondBall = $scope.canvasTest.particles[u];
-
-                        //check for box overlap first for performance reasons
-                        if (firstBall.x + firstBall.radius + secondBall.radius > secondBall.x
-                            && firstBall.x < secondBall.x + firstBall.radius + secondBall.radius
-                            && firstBall.y + firstBall.radius + secondBall.radius > secondBall.y
-                            && firstBall.y < secondBall.y + firstBall.radius + secondBall.radius)
-                        {
-                            //balls are close, now check exact distance
-                            var distance = Math.sqrt(Math.pow(Math.abs(firstBall.x - secondBall.x), 2) + Math.pow(Math.abs(firstBall.y - secondBall.y), 2));
-
-                            if (distance < firstBall.radius + secondBall.radius)
-                            {
-                                //balls have collided
-                                //var collisionPointX = ((firstBall.x * secondBall.radius) + (secondBall.x * firstBall.radius)) / (firstBall.radius + secondBall.radius);
-                                //var collisionPointY = ((firstBall.y * secondBall.radius) + (secondBall.y * firstBall.radius)) / (firstBall.radius + secondBall.radius);
-
-                                var newVelX1 = (firstBall.vx * (firstBall.mass - secondBall.mass) + (2 * secondBall.mass * secondBall.vx)) / (firstBall.mass + secondBall.mass);
-                                var newVelY1 = (firstBall.vy * (firstBall.mass - secondBall.mass) + (2 * secondBall.mass * secondBall.vy)) / (firstBall.mass + secondBall.mass);
-                                var newVelX2 = (secondBall.vx * (secondBall.mass - firstBall.mass) + (2 * firstBall.mass * firstBall.vx)) / (firstBall.mass + secondBall.mass);
-                                var newVelY2 = (secondBall.vy * (secondBall.mass - firstBall.mass) + (2 * firstBall.mass * firstBall.vy)) / (firstBall.mass + secondBall.mass);
-
-                                firstBall.vx = newVelX1;
-                                firstBall.vy = newVelY1;
-                                secondBall.vx = newVelX2;
-                                secondBall.vy = newVelY2;
-
-                                firstBall.x = firstBall.x + newVelX1;
-                                firstBall.y = firstBall.y + newVelY1;
-                                secondBall.x = secondBall.x + newVelX2;
-                                secondBall.y = secondBall.y + newVelY2;
-                            }
                         }
                     }
                 }

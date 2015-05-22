@@ -3,9 +3,6 @@
         <div class="ui button" ng-class="{blue: canvasTest.gravity, red: !canvasTest.gravity}" ng-click="canvasTest.toggleGravity()">
             Turn Gravity {{canvasTest.gravity ? 'Off' : 'On'}}
         </div>
-        <div class="ui button" ng-class="{blue: canvasTest.collisions, red: !canvasTest.collisions}" ng-click="canvasTest.toggleCollisions()">
-            Turn Collisions {{canvasTest.collisions ? 'Off' : 'On'}}
-        </div>
     </div>
     <div class="canvas-wrapper full-width height-11">
         <canvas id="canvas"></canvas>
