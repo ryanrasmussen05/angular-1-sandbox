@@ -104,3 +104,35 @@ canvas {
 .width-9 {width: 75%;}
 .width-10 {width: 83.333%}
 .width-11 {width: 91.666%;}
+
+/*colors taken from semantic css*/
+
+.black {background-color: #1B1C1D;}
+.blue {background-color: #3B83C0;}
+.green {background-color: #5BBD72;}
+.grey {background-color: #CCCCCC;}
+.orange {background-color: #E07B53;}
+.pink {background-color: #D9499A;}
+.purple {background-color: #564F8A;}
+.red {background-color: #D95C5C;}
+.teal {background-color: #00B5AD;}
+.yellow {background-color: #F2C61F;}
+
+/*---  Light Colors  ---*/
+.lightBlack {background-color: #333333;}
+.lightBlue {background-color: #54C8FF;}
+.lightGreen {background-color: #2ECC40;}
+.lightOrange {background-color: #FF851B;}
+.lightPink {background-color: #FF8EDF;}
+.lightPurple {background-color: #CDC6FF;}
+.lightRed {background-color: #FF695E;}
+.lightTeal {background-color: #6DFFFF;}
+.lightYellow {background-color: #FFE21F;}
+
+/*---   Neutrals  ---*/
+.fullBlack {background-color: #000000;}
+.darkGrey {background-color: #AAAAAA;}
+.lightGrey {background-color: #DCDDDE;}
+.offWhite {background-color: #FAFAFA;}
+.darkWhite {background-color: #F0F0F0;}
+.white {background-color: #FFFFFF;}

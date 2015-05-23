@@ -7,12 +7,19 @@ angular.module('ryanWeb').directive('canvasTest', function() {
         templateUrl: 'components/canvasTest/canvas.test.html',
         scope: {},
         link: function(scope) {
+            $('.ui.dropdown').dropdown({
+                onChange: function(value) {
+                    scope.canvasTest.orbs = value;
+                }
+            });
+
             scope.canvasTest.init();
         },
         controller: function($scope, $element, $interval) {
             $scope.canvasTest = {};
             $scope.canvasTest.gravity = false;
             $scope.canvasTest.collisions = false;
+            $scope.canvasTest.orbs = 50;
 
             $scope.canvasTest.canvas = null;
             $scope.canvasTest.ctx = null;
@@ -21,6 +28,15 @@ angular.module('ryanWeb').directive('canvasTest', function() {
             $scope.canvasTest.height = $('.canvas-wrapper').height();
 
             $scope.canvasTest.particles = [];
+            $scope.canvasTest.drawInterval = null;
+
+            $scope.$watch('canvasTest.orbs', function(newVal, oldVal) {
+                if(newVal !== oldVal) {
+                    $interval.cancel($scope.canvasTest.drawInterval);
+                    $scope.canvasTest.particles = [];
+                    $scope.canvasTest.init();
+                }
+            });
 
             $scope.canvasTest.init = function() {
                 $scope.canvasTest.canvas = $('#canvas')[0];
@@ -29,11 +45,11 @@ angular.module('ryanWeb').directive('canvasTest', function() {
 
                 $scope.canvasTest.ctx = $scope.canvasTest.canvas.getContext('2d');
 
-                for(var i = 0; i < 50; i++) {
+                for(var i = 0; i < $scope.canvasTest.orbs; i++) {
                     $scope.canvasTest.particles.push(new Particle());
                 }
 
-                $interval(draw, 10);
+                $scope.canvasTest.drawInterval = $interval(draw, 10);
             };
 
             $scope.canvasTest.toggleGravity = function() {
