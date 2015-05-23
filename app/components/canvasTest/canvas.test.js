@@ -12,6 +12,7 @@ angular.module('ryanWeb').directive('canvasTest', function() {
         controller: function($scope, $element, $interval) {
             $scope.canvasTest = {};
             $scope.canvasTest.gravity = false;
+            $scope.canvasTest.collisions = false;
 
             $scope.canvasTest.canvas = null;
             $scope.canvasTest.ctx = null;
@@ -32,18 +33,22 @@ angular.module('ryanWeb').directive('canvasTest', function() {
                     $scope.canvasTest.particles.push(new Particle());
                 }
 
-                $interval(draw, 30);
+                $interval(draw, 10);
             };
 
             $scope.canvasTest.toggleGravity = function() {
                 $scope.canvasTest.gravity = !$scope.canvasTest.gravity;
             };
 
+            $scope.canvasTest.toggleCollisions = function() {
+                $scope.canvasTest.collisions = !$scope.canvasTest.collisions;
+            };
+
             function Particle() {
                 this.x = Math.random() * $scope.canvasTest.width;
                 this.y = Math.random() * $scope.canvasTest.height;
-                this.vx = Math.random() * 20 - 10;
-                this.vy = Math.random() * 20 - 10;
+                this.vx = Math.random() * 2 - 1;
+                this.vy = Math.random() * 2 - 1;
                 this.radius = Math.random() * 20 + 20;
 
                 var r = Math.random() * 255 >> 0;
@@ -51,7 +56,7 @@ angular.module('ryanWeb').directive('canvasTest', function() {
                 var b = Math.random() * 255 >> 0;
                 this.color = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5)';
 
-                this.mass = 4 / 3 * Math.PI * Math.pow(this.radius, 3);
+                this.mass = Math.PI * Math.pow(this.radius, 2);
             }
 
             function draw() {
@@ -82,7 +87,7 @@ angular.module('ryanWeb').directive('canvasTest', function() {
 
                     //vertical acceleration if gravity on
                     if($scope.canvasTest.gravity) {
-                        particle.vy += 1;
+                        particle.vy += 0.1;
                     }
 
                     //left right movement
@@ -107,9 +112,83 @@ angular.module('ryanWeb').directive('canvasTest', function() {
                         }
                     }
                 }
+
+                if($scope.canvasTest.collisions) {
+                    calculateCollisions();
+                }
+            }
+
+            function calculateCollisions() {
+                for(var t = 0; t < $scope.canvasTest.particles.length; t++) {
+
+                    var firstBall = $scope.canvasTest.particles[t];
+
+                    for (var u = t + 1; u < $scope.canvasTest.particles.length; u++) {
+                        var secondBall = $scope.canvasTest.particles[u];
+
+                        //check for box overlap first for performance reasons
+                        if (firstBall.x + firstBall.radius + secondBall.radius > secondBall.x
+                            && firstBall.x < secondBall.x + firstBall.radius + secondBall.radius
+                            && firstBall.y + firstBall.radius + secondBall.radius > secondBall.y
+                            && firstBall.y < secondBall.y + firstBall.radius + secondBall.radius)
+                        {
+                            //balls are close, now check exact distance
+                            var distance = Math.sqrt(Math.pow(firstBall.x - secondBall.x, 2) + Math.pow(firstBall.y - secondBall.y, 2));
+
+                            if (distance < firstBall.radius + secondBall.radius)
+                            {
+                                //balls have collided
+
+                                //do not recalculate collision if balls are moving apart, prevent overlapping balls issue
+                                if(getNextDistance(firstBall, secondBall) < distance) {
+                                    var collisionNormal = {};
+                                    collisionNormal.x = (firstBall.x - secondBall.x) / distance;
+                                    collisionNormal.y = (firstBall.y - secondBall.y) / distance;
+
+                                    //Decompose firstBall velocity into parallel and orthogonal part
+                                    var firstBallDot = collisionNormal.x * firstBall.vx + collisionNormal.y * firstBall.vy;
+                                    var firstBallCollide = {};
+                                    firstBallCollide.x = collisionNormal.x * firstBallDot;
+                                    firstBallCollide.y = collisionNormal.y * firstBallDot;
+                                    var firstBallRemainder = {};
+                                    firstBallRemainder.x = firstBall.vx - firstBallCollide.x;
+                                    firstBallRemainder.y = firstBall.vy - firstBallCollide.y;
+
+                                    //Decompose secondBall velocity into parallel and orthogonal part
+                                    var secondBallDot = collisionNormal.x * secondBall.vx + collisionNormal.y * secondBall.vy;
+                                    var secondBallCollide = {};
+                                    secondBallCollide.x = collisionNormal.x * secondBallDot;
+                                    secondBallCollide.y = collisionNormal.y * secondBallDot;
+                                    var secondBallRemainder = {};
+                                    secondBallRemainder.x = secondBall.vx - secondBallCollide.x;
+                                    secondBallRemainder.y = secondBall.vy - secondBallCollide.y;
+
+                                    //calculate changes in velocity perpendicular to collision plane, conservation of momentum
+                                    var newVelX1 = (firstBallCollide.x * (firstBall.mass - secondBall.mass) + (2 * secondBall.mass * secondBallCollide.x)) / (firstBall.mass + secondBall.mass);
+                                    var newVelY1 = (firstBallCollide.y * (firstBall.mass - secondBall.mass) + (2 * secondBall.mass * secondBallCollide.y)) / (firstBall.mass + secondBall.mass);
+                                    var newVelX2 = (secondBallCollide.x * (secondBall.mass - firstBall.mass) + (2 * firstBall.mass * firstBallCollide.x)) / (firstBall.mass + secondBall.mass);
+                                    var newVelY2 = (secondBallCollide.y * (secondBall.mass - firstBall.mass) + (2 * firstBall.mass * firstBallCollide.y)) / (firstBall.mass + secondBall.mass);
+
+                                    //add collision result to remaining parallel velocities
+                                    firstBall.vx = newVelX1 + firstBallRemainder.x;
+                                    firstBall.vy = newVelY1 + firstBallRemainder.y;
+                                    secondBall.vx = newVelX2 + secondBallRemainder.x;
+                                    secondBall.vy = newVelY2 + secondBallRemainder.y;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+
+            function getNextDistance(firstBall, secondBall) {
+                var x1 = firstBall.x + firstBall.vx;
+                var y1 = firstBall.y + firstBall.vy;
+                var x2 = secondBall.x + secondBall.vx;
+                var y2 = secondBall.y + secondBall.vy;
+
+                return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
             }
         }
     };
 });
-
-
