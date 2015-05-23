@@ -1,5 +1,5 @@
-<div class="p full-width full-height">
-    <div class="full-width height-1">
+<div class="full-width full-height vertical layout">
+    <div class="full-width pv">
         <div class="ui button" ng-class="{blue: canvasTest.gravity, red: !canvasTest.gravity}" ng-click="canvasTest.toggleGravity()">
             Turn Gravity {{canvasTest.gravity ? 'Off' : 'On'}}
         </div>
@@ -7,7 +7,7 @@
             Turn Collisions {{canvasTest.collisions ? 'Off' : 'On'}}
         </div>
     </div>
-    <div class="canvas-wrapper full-width height-11">
+    <div class="canvas-wrapper full-width flex">
         <canvas id="canvas"></canvas>
     </div>
 </div>

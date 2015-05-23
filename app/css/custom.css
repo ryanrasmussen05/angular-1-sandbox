@@ -1,3 +1,25 @@
+.page-padding {padding-top: 40px;}
+.full-width {width: 100% !important;}
+.full-height {height: 100% !important;}
+
+.horizontal.layout {
+    display: flex;
+    flex-direction: row;
+}
+
+.vertical.layout {
+    display: flex;
+    flex-direction: column;
+}
+
+.flex {
+    flex: 1;
+}
+
+canvas {
+    display: block;
+}
+
 .m0 {margin: 0 !important;}
 .m\-\- {margin: 5px !important;}
 .m\- {margin: 10px !important;}
@@ -58,10 +80,6 @@
 .pr {padding-right: 15px !important;}
 .pr\+ {padding-right: 20px !important;}
 .pr\+\+ {padding-right: 25px !important;}
-
-.page-padding {padding-top: 40px;}
-.full-width {width: 100% !important;}
-.full-height {height: 100% !important;}
 
 .height-1 {height: 8.333%;}
 .height-2 {height: 16.666%;}
