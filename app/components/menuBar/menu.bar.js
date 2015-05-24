@@ -7,7 +7,7 @@ angular.module('ryanWeb').directive('menuBar', function() {
         templateUrl: 'components/menuBar/menu.bar.html',
         scope: {},
         link: function() {
-            $('.left.sidebar').find('.item').click(function() {
+            $('.left.sidebar').find('.item').not('.menu-category').click(function() {
                 $('.left.sidebar').sidebar('hide');
             });
         },

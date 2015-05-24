@@ -1,10 +1,10 @@
 'use strict';
 
-angular.module('ryanWeb').directive('canvasTest', function() {
+angular.module('ryanWeb').directive('particles', function() {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'components/canvasTest/canvas.test.html',
+        templateUrl: 'components/canvas/particles/particles.html',
         scope: {},
         link: function(scope) {
             $('.ui.dropdown').dropdown({

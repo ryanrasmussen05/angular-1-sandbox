@@ -19,14 +19,19 @@
     <script src="components/menuBar/menu.bar.js"></script>
     <script src="components/shoppingList/shopping.list.js"></script>
     <script src="components/shoppingList/shopping.list.service.js"></script>
-    <script src="components/canvasTest/canvas.test.js"></script>
+    <script src="components/canvas/canvasRouter/canvas.router.js"></script>
+    <script src="components/canvas/particles/particles.js"></script>
 </head>
 
 <body>
     <div class="ui left inverted sidebar vertical menu">
-        <a class="item" href="#/canvas">
-            Canvas <i class="wait icon"></i>
-        </a>
+        <div class="item menu-category">
+            <i class="paint brush icon"></i> Canvas Work
+            <div class="menu">
+                <a class="item" href="#/canvas/particles">Particles</a>
+                <a class="item" href="#/canvas/pong">Pong</a>
+            </div>
+        </div>
         <a class="item" href="#/shopping">
             Shopping List <i class="shop icon"></i>
         </a>
