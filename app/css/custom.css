@@ -16,6 +16,10 @@
     flex: 1;
 }
 
+.centered {
+    justify-content: center;
+}
+
 canvas {
     display: block;
 }

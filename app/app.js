@@ -8,7 +8,7 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/shopping', {
     templateUrl: 'views/shoppingList.html'
   }).otherwise({
-    redirectTo: '/canvas'
+    redirectTo: '/canvas/particles'
   })
 }]);
 
