@@ -15,7 +15,7 @@ angular.module('ryanWeb').directive('particles', function() {
 
             scope.canvasTest.init();
         },
-        controller: function($scope, $element, $interval) {
+        controller: function($scope, $rootScope, $window) {
             $scope.canvasTest = {};
             $scope.canvasTest.gravity = false;
             $scope.canvasTest.collisions = false;
@@ -32,7 +32,7 @@ angular.module('ryanWeb').directive('particles', function() {
 
             $scope.$watch('canvasTest.orbs', function(newVal, oldVal) {
                 if(newVal !== oldVal) {
-                    $interval.cancel($scope.canvasTest.drawInterval);
+                    $window.cancelAnimationFrame($scope.canvasTest.interval);
                     $scope.canvasTest.particles = [];
                     $scope.canvasTest.init();
                 }
@@ -49,7 +49,7 @@ angular.module('ryanWeb').directive('particles', function() {
                     $scope.canvasTest.particles.push(new Particle());
                 }
 
-                $scope.canvasTest.drawInterval = $interval(draw, 10);
+                drawLoop();
             };
 
             $scope.canvasTest.toggleGravity = function() {
@@ -60,11 +60,16 @@ angular.module('ryanWeb').directive('particles', function() {
                 $scope.canvasTest.collisions = !$scope.canvasTest.collisions;
             };
 
+            function drawLoop() {
+                $scope.canvasTest.interval = $window.requestAnimationFrame(drawLoop);
+                draw();
+            }
+
             function Particle() {
                 this.x = Math.random() * $scope.canvasTest.width;
                 this.y = Math.random() * $scope.canvasTest.height;
-                this.vx = Math.random() * 2 - 1;
-                this.vy = Math.random() * 2 - 1;
+                this.vx = Math.random() * 4 - 2;
+                this.vy = Math.random() * 4 - 2;
                 this.radius = Math.random() * 20 + 20;
 
                 var r = Math.random() * 255 >> 0;
@@ -103,7 +108,7 @@ angular.module('ryanWeb').directive('particles', function() {
 
                     //vertical acceleration if gravity on
                     if($scope.canvasTest.gravity) {
-                        particle.vy += 0.1;
+                        particle.vy += 0.2;
                     }
 
                     //left right movement
@@ -131,6 +136,10 @@ angular.module('ryanWeb').directive('particles', function() {
 
                 if($scope.canvasTest.collisions) {
                     calculateCollisions();
+                }
+
+                if(!$rootScope.$$phase) {
+                    $scope.$digest();
                 }
             }
 

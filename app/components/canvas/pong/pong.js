@@ -9,7 +9,7 @@ angular.module('ryanWeb').directive('pong', function() {
         link: function(scope) {
             scope.pong.initialize();
         },
-        controller: function($scope, $window, $timeout) {
+        controller: function($scope, $window) {
             $scope.pong = {};
             $scope.pong.canvas = null;
             $scope.pong.ctx = null;
