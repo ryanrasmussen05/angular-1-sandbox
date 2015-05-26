@@ -63,8 +63,8 @@ angular.module('ryanWeb').directive('particles', function() {
             function Particle() {
                 this.x = Math.random() * $scope.canvasTest.width;
                 this.y = Math.random() * $scope.canvasTest.height;
-                this.vx = Math.random() * 4 - 2;
-                this.vy = Math.random() * 4 - 2;
+                this.vx = Math.random() * 10 - 5;
+                this.vy = Math.random() * 10 - 5;
                 this.radius = Math.random() * 20 + 20;
 
                 var r = Math.random() * 255 >> 0;
@@ -103,7 +103,7 @@ angular.module('ryanWeb').directive('particles', function() {
 
                     //vertical acceleration if gravity on
                     if($scope.canvasTest.gravity) {
-                        particle.vy += 0.2;
+                        particle.vy += 0.3;
                     }
 
                     //left right movement
@@ -198,10 +198,10 @@ angular.module('ryanWeb').directive('particles', function() {
             }
 
             function getNextDistance(firstBall, secondBall) {
-                var x1 = firstBall.x + firstBall.vx;
-                var y1 = firstBall.y + firstBall.vy;
-                var x2 = secondBall.x + secondBall.vx;
-                var y2 = secondBall.y + secondBall.vy;
+                var x1 = firstBall.x + (firstBall.vx * 0.01);
+                var y1 = firstBall.y + (firstBall.vy * 0.01);
+                var x2 = secondBall.x + (secondBall.vx * 0.01);
+                var y2 = secondBall.y + (secondBall.vy * 0.01);
 
                 return Math.sqrt(Math.pow(x1 - x2, 2) + Math.pow(y1 - y2, 2));
             }
