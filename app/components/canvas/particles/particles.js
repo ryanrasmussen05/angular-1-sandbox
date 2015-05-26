@@ -75,7 +75,7 @@ angular.module('ryanWeb').directive('particles', function() {
                 var r = Math.random() * 255 >> 0;
                 var g = Math.random() * 255 >> 0;
                 var b = Math.random() * 255 >> 0;
-                this.color = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5)';
+                this.color = 'rgba(' + r + ',' + g + ',' + b + ',0.5)';
 
                 this.mass = Math.PI * Math.pow(this.radius, 2);
             }
