@@ -15,7 +15,7 @@ angular.module('ryanWeb').directive('particles', function() {
 
             scope.canvasTest.init();
         },
-        controller: function($scope, $rootScope, $window) {
+        controller: function($scope, $element, $interval) {
             $scope.canvasTest = {};
             $scope.canvasTest.gravity = false;
             $scope.canvasTest.collisions = false;
@@ -32,7 +32,7 @@ angular.module('ryanWeb').directive('particles', function() {
 
             $scope.$watch('canvasTest.orbs', function(newVal, oldVal) {
                 if(newVal !== oldVal) {
-                    $window.cancelAnimationFrame($scope.canvasTest.interval);
+                    $interval.cancel($scope.canvasTest.drawInterval);
                     $scope.canvasTest.particles = [];
                     $scope.canvasTest.init();
                 }
@@ -49,7 +49,7 @@ angular.module('ryanWeb').directive('particles', function() {
                     $scope.canvasTest.particles.push(new Particle());
                 }
 
-                drawLoop();
+                $scope.canvasTest.drawInterval = $interval(draw, 1000 / 60);
             };
 
             $scope.canvasTest.toggleGravity = function() {
@@ -59,11 +59,6 @@ angular.module('ryanWeb').directive('particles', function() {
             $scope.canvasTest.toggleCollisions = function() {
                 $scope.canvasTest.collisions = !$scope.canvasTest.collisions;
             };
-
-            function drawLoop() {
-                $scope.canvasTest.interval = $window.requestAnimationFrame(drawLoop);
-                draw();
-            }
 
             function Particle() {
                 this.x = Math.random() * $scope.canvasTest.width;
@@ -75,7 +70,7 @@ angular.module('ryanWeb').directive('particles', function() {
                 var r = Math.random() * 255 >> 0;
                 var g = Math.random() * 255 >> 0;
                 var b = Math.random() * 255 >> 0;
-                this.color = 'rgba(' + r + ',' + g + ',' + b + ',0.5)';
+                this.color = 'rgba(' + r + ', ' + g + ', ' + b + ', 0.5)';
 
                 this.mass = Math.PI * Math.pow(this.radius, 2);
             }
@@ -136,10 +131,6 @@ angular.module('ryanWeb').directive('particles', function() {
 
                 if($scope.canvasTest.collisions) {
                     calculateCollisions();
-                }
-
-                if(!$rootScope.$$phase) {
-                    $scope.$digest();
                 }
             }
 
