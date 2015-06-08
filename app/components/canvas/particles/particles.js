@@ -19,7 +19,7 @@ angular.module('ryanWeb').directive('particles', function() {
             $scope.canvasTest = {};
             $scope.canvasTest.gravity = false;
             $scope.canvasTest.collisions = true;
-            $scope.canvasTest.orbs = 50;
+            $scope.canvasTest.orbs = 30;
 
             $scope.canvasTest.canvas = null;
             $scope.canvasTest.ctx = null;
