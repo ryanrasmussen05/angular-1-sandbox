@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('ryanWeb').directive('menuBar', function() {
+    var $ = require('jquery');
+
     return {
         restrict: 'E',
         replace: true,

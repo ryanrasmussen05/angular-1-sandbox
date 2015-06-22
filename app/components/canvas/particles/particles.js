@@ -1,6 +1,9 @@
 'use strict';
 
+/*jshint bitwise: false*/
 angular.module('ryanWeb').directive('particles', function() {
+    var $ = require('jquery');
+
     return {
         restrict: 'E',
         replace: true,
@@ -143,10 +146,10 @@ angular.module('ryanWeb').directive('particles', function() {
                         var secondBall = $scope.canvasTest.particles[u];
 
                         //check for box overlap first for performance reasons
-                        if (firstBall.x + firstBall.radius + secondBall.radius > secondBall.x
-                            && firstBall.x < secondBall.x + firstBall.radius + secondBall.radius
-                            && firstBall.y + firstBall.radius + secondBall.radius > secondBall.y
-                            && firstBall.y < secondBall.y + firstBall.radius + secondBall.radius)
+                        if (firstBall.x + firstBall.radius + secondBall.radius > secondBall.x &&
+                            firstBall.x < secondBall.x + firstBall.radius + secondBall.radius &&
+                            firstBall.y + firstBall.radius + secondBall.radius > secondBall.y &&
+                            firstBall.y < secondBall.y + firstBall.radius + secondBall.radius)
                         {
                             //balls are close, now check exact distance
                             var distance = Math.sqrt(Math.pow(firstBall.x - secondBall.x, 2) + Math.pow(firstBall.y - secondBall.y, 2));

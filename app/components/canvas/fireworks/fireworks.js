@@ -1,6 +1,8 @@
 'use strict';
 
 angular.module('ryanWeb').directive('fireworks', function() {
+    var $ = require('jquery');
+
     return {
         restrict: 'E',
         replace: true,
