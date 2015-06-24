@@ -1,6 +1,7 @@
 .page-padding {padding-top: 40px;}
 .full-width {width: 100% !important;}
 .full-height {height: 100% !important;}
+.main-view {position:absolute; top: 40px; bottom:0; left:0; right:0; overflow-y:auto;}
 
 .horizontal.layout {
     display: flex;
@@ -84,30 +85,6 @@ canvas {
 .pr {padding-right: 15px !important;}
 .pr\+ {padding-right: 20px !important;}
 .pr\+\+ {padding-right: 25px !important;}
-
-.height-1 {height: 8.333%;}
-.height-2 {height: 16.666%;}
-.height-3 {height: 25%;}
-.height-4 {height: 33.333%;}
-.height-5 {height: 41.666%;}
-.height-6 {height: 50%;}
-.height-7 {height: 58.333%;}
-.height-8 {height: 66.666%;}
-.height-9 {height: 75%;}
-.height-10 {height: 83.333%}
-.height-11 {height: 91.666%;}
-
-.width-1 {width: 8.333%;}
-.width-2 {width: 16.666%;}
-.width-3 {width: 25%;}
-.width-4 {width: 33.333%;}
-.width-5 {width: 41.666%;}
-.width-6 {width: 50%;}
-.width-7 {width: 58.333%;}
-.width-8 {width: 66.666%;}
-.width-9 {width: 75%;}
-.width-10 {width: 83.333%}
-.width-11 {width: 91.666%;}
 
 /*colors taken from semantic css*/
 
