@@ -1,0 +1,239 @@
+<div class="ui page grid m0">
+
+    <div class="row">
+        <div class="column">
+            <h1 class="ui center aligned header">
+                Which Lockheed Martin aircraft are you?
+            </h1>
+        </div>
+    </div>
+
+    <div class="three column centered row" ng-show="airplaneQuiz.showStartButton()">
+        <div class="column">
+            <button class="fluid ui large teal button" ng-click="airplaneQuiz.startQuiz()">Click here to start the quiz!</button>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 1">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    When you play 'Hide-and-Seek,' which are you better at?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(2)">Hiding! I always find the best spots</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(3)">Seeking! I can find anyone, anywhere</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 2">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    What is your favorite kind of movie?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(4)">I'm an action junkie!</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(5)">Science fiction all the way!</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 3">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    Would you rather win a weightlifting competition or a track race?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(5)">I'd rather win both!</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(6)">I'm all about speed</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 4">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    What is your learning style?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(7)">Observe as much as i can</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(8)">Learn by doing</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 5">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    Can you keep a secret?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('skunk-works')">!!!TOP SECRET!!!</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('f-16')">I like to share things with my friends</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 6">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    Would you consider yourself a 'Jack of All Trades' or 'Master of One'?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('f-16')">I tend to be good at everything i try</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(9)">My talents are very specific</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 7">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    How do you feel about heights?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('u-2')">The higher, the better!</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('f-35')">I'm comfortable anywhere</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 8">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    Do you usually fly solo or roll with a crew?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('f-35')">There's only room for one!</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setActiveQuestion(10)">I'm usually with my crew</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 9">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    Do you prefer the ocean or the mountains?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('p-3')">I feel at home near the sea</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('f-22')">I like to be up near the clouds</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="row" ng-show="airplaneQuiz.activeQuestion === 10">
+        <div class="column">
+            <div class="ui segment">
+                <h2 class="ui center aligned header">
+                    How do you carry groceries in from your car?
+                </h2>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('c-130')">I try to take all of the bags at once, like the Hulk!</button>
+                <br/>
+                <button class="fluid ui large blue button" ng-click="airplaneQuiz.setAircraftResult('c-5')">I only lift what I can carry - several at a time!</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'c-5'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/c-5.png">
+            <h3 class="ui header">You are the C-5 Galaxy! You always seem to be in the right place at the right time and are strong enough to pull
+                some serious weight, just like this airlifter can carry more cargo farther distances than any other aircraft. You
+                are also high energy and can always go the distance, like the C-5 itself, which is longer in length than the Wright
+                brothers' first flight.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'c-130'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/c-130.png">
+            <h3 class="ui header">You are the C-130 Hercules! Just like this airlifter can take off on an incredibly short runway, you
+                know where the action is and are ready to go at a moment's notice. You like to plan ahead but are also fond of change
+                and like to experience new things, just as the C-130 can be used for everything from military transport to civilian
+                services and humanitarian aid.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'f-22'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/f-22.png">
+            <h3 class="ui header">You are the F-22 Raptor! Like this 5th Generation air-to-air superiority fighter, you are all about the
+                thrill - whether you are out for an adrenaline rush or trying to unearth a secret. Like the F-22 and its reputation as the
+                world's preeminent air dominance fighter, you have a good understanding of your talents and are always looking to stand
+                apart from the crowd.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'p-3'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/p-3.png">
+            <h3 class="ui header">You are the P-3 Orion! Just like this enduring maritime patrol aircraft, you are very persistent and highly
+                capable in everything you do. You recognize your strengths and tend to push yourself farther every day, just like the P-3
+                itself, which can fly a mission for 12 hours straight and has been operational for more than 50 years.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'f-35'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/f-35.png">
+            <h3 class="ui header">You are the F-35 Lightning II! Like this supreme 5th Generation fighter, you enjoy learning by doing but always
+                take lessons from those that have come before you. You aren't afraid to fly solo but are happiest with friends and can adapt to
+                almost any situation - just as this single-seat fighter provides air support for the Navy, Air Force, Marine Corps and several
+                countries.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'u-2'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/u-2.png">
+            <h3 class="ui header">You are the U-2 Dragon Lady! Like the U-2, which flies at altitudes higher than 70,000 feet, you aren't afraid of
+                pushing yourself to new limits and are very observant of the environment around you. You tend to be in the know, just like the U-2,
+                which provides the Air Force with some of the most advanced intelligence, surveillance and reconnaissance capabilities existing today.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'f-16'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/f-16.png">
+            <h3 class="ui header">You are the F-16 Fighting Falcon! Like the world's most capable 4th Generation multi-role fighter, you tend to be good
+                at anything you pick up and have many talents. You are a hard worker and enjoy sharing information for the good of the group, like the
+                F-16 itself, which has become the workhorse of the fighter fleet for 28 customers around the world.</h3>
+        </div>
+    </div>
+
+    <div class="sixteen wide column" ng-show="airplaneQuiz.aircraftResult === 'skunk-works'">
+        <div class="ui segment">
+            <img class="ui centered big image" src="images/lockheed/skunk-works.png">
+            <h3 class="ui header">You are part of the top secret Skunk Works fleet! Like this innovation hub, you have a good sense of self, though some
+                might say you are mysterious. You like to dabble in a lot of different projects and pursue those that will truly payoff. Among your
+                friends, you are certainly the best at keeping secrets, making you a perfect fit for the classified aircraft in development at Skunk
+                Works</h3>
+        </div>
+    </div>
+
+    <div class="three column centered row" ng-show="airplaneQuiz.showRestartButton()">
+        <div class="column">
+            <button class="fluid ui large teal button" ng-click="airplaneQuiz.startQuiz()">Click here to restart the quiz!</button>
+        </div>
+    </div>
+</div>

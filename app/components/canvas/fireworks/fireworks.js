@@ -42,7 +42,7 @@ angular.module('ryanWeb').directive('fireworks', function() {
 
                 addMouseListeners();
 
-                $interval(draw, 33);
+                $interval(draw, 16);
             }
 
             function draw() {
@@ -65,7 +65,7 @@ angular.module('ryanWeb').directive('fireworks', function() {
 
                 if(timerTick >= timerTotal) {
                     if(!mousedown) {
-                        fireworks.push(new Firework(width / 2, height, random(0, width), random(0, height / 2)));
+                        fireworks.push(new Firework(width / 2, height, random(width / 3, 2 * width / 3), random(0, height / 2)));
                         timerTick = 0;
                     }
                 } else {
@@ -97,12 +97,12 @@ angular.module('ryanWeb').directive('fireworks', function() {
                 }
 
                 this.angle = Math.atan2(targetY - startY, targetX - startX);
-                this.speed = random(15, 25);
+                this.speed = random(10, 13);
                 this.vx = Math.cos(this.angle) * this.speed;
                 this.vy = Math.sin(this.angle) * this.speed;
                 this.brightness = random(50, 70);
 
-                this.fuseTime = 50;
+                this.fuseTime = 100;
                 this.currentTime = 0;
             }
 
@@ -111,7 +111,7 @@ angular.module('ryanWeb').directive('fireworks', function() {
                 this.coordinates.pop();
                 this.coordinates.unshift([this.x, this.y]);
 
-                this.vy = this.vy + 0.2;
+                this.vy = this.vy + 0.1;
                 this.currentTime++;
 
                 //blow up if fuse timer runs out, or near edges
@@ -137,12 +137,12 @@ angular.module('ryanWeb').directive('fireworks', function() {
                 this.y = y;
                 this.angle = random(0, Math.PI * 2);
 
-                this.speed = random(1, 10);
+                this.speed = random(1, 5);
                 this.vx = Math.cos(this.angle) * this.speed;
                 this.vy = Math.sin(this.angle) * this.speed;
 
                 this.friction = 0.95;
-                this.gravity = 0.1;
+                this.gravity = 0.05;
                 this.hue = random(hue - 20, hue + 20);
                 this.brightness = random(50, 80);
                 this.alpha = 1;
