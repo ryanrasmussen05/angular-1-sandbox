@@ -16,7 +16,7 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/airplaneQuiz', {
     templateUrl: 'views/lockheedQuiz.html'
   }).otherwise({
-    redirectTo: '/resume'
+    redirectTo: '/home'
 })
 }]);
 
@@ -25,5 +25,6 @@ require('./components/canvas/canvasRouter/canvas.router');
 require('./components/canvas/fireworks/fireworks');
 require('./components/canvas/particles/particles');
 require('./components/menuBar/menu.bar');
+require('./components/physics/physics');
 require('./components/resume/resume');
 

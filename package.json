@@ -16,7 +16,8 @@
     "gulp-uglify": "^1.2.0"
   },
   "browser": {
-    "semantic-ui": "./app/lib/semantic-ui/semantic.js"
+    "semantic-ui": "./app/lib/semantic-ui/semantic.js",
+    "physicsjs": "./app/lib/physicsjs/physicsjs-full.js"
   },
   "browserify": {
     "transform": [
