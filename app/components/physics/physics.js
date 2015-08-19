@@ -20,64 +20,84 @@ angular.module('ryanWeb').directive('physics', function() {
             function draw() {
                 var width = $('#physics').width();
                 var height = $('#physics').height();
-                var world = Physics();
+                var viewportBounds = Physics.aabb(0, 0, width, height);
+
+                var world = Physics({ sleepDisabled: true });
 
                 var renderer = Physics.renderer('canvas', {
-                    el: 'physics',
-                    width: width,
-                    height: height,
-                    meta: false, // don't display meta data
-                    styles: {
-                        // set colors for the circle bodies
-                        'circle' : {
-                            strokeStyle: '#351024',
-                            lineWidth: 1,
-                            fillStyle: '#d33682',
-                            angleIndicator: '#351024'
-                        }
-                    }
+                    el: 'physics'
                 });
-
-                // add the renderer
                 world.add(renderer);
-                // render on each step
-                world.on('step', function(){
+
+                world.on('step', function () {
                     world.render();
                 });
 
-                // bounds of the window
-                var viewportBounds = Physics.aabb(0, 0, width, height);
+                world.add(Physics.behavior('interactive', { el: renderer.container }));
 
-                // constrain objects to these bounds
-                world.add(Physics.behavior('edge-collision-detection', {
+                var edgeBounce = Physics.behavior('edge-collision-detection', {
                     aabb: viewportBounds,
-                    restitution: 0.99,
-                    cof: 0.99
-                }));
+                    restitution: 0.99, //energy % after collision
+                    cof: 0.8 //friction with boundaries
+                });
 
-                // add a circle
-                world.add(
-                    Physics.body('circle', {
-                        x: 50, // x-coordinate
-                        y: 30, // y-coordinate
-                        vx: 0.2, // velocity in x-direction
-                        vy: 0.01, // velocity in y-direction
-                        radius: 20
-                    })
-                );
+                window.addEventListener('resize', function () {
+                    viewportBounds = Physics.aabb(0, 0, renderer.width, renderer.height);
+                    edgeBounce.setAABB(viewportBounds);
+                }, true);
 
-                // ensure objects bounce when edge collision is detected
-                world.add( Physics.behavior('body-impulse-response') );
+                var circles = [];
 
-                // add some gravity
-                world.add( Physics.behavior('constant-acceleration') );
+                for(var counter = 0; counter < 180; counter++){
+                    circles.push(
+                        Physics.body('circle', {
+                            x: Math.random() * width, //(width - 10) + 10,
+                            y: Math.random() * height, //(height - 10) + 10,
+                            mass: 1,
+                            radius: 4,
+                            vx: Math.random() * 0.01 - 0.005,
+                            vy: Math.random() * 0.01 - 0.005,
+                            restitution: 0.99,
+                            styles: {
+                                fillStyle: '#FF0000'
+                            }
+                        })
+                    );
+                }
 
-                // subscribe to ticker to advance the simulation
-                Physics.util.ticker.on(function( time, dt ){
+                world.add(circles);
+
+                var attractor = Physics.behavior('attractor', {
+                    order: 0,
+                    strength: .002
+                });
+                world.on({
+                    'interact:poke': function( pos ){
+                        world.wakeUpAll();
+                        attractor.position( pos );
+                        world.add( attractor );
+                    }
+                    ,'interact:move': function( pos ){
+                        attractor.position( pos );
+                    }
+                    ,'interact:release': function(){
+                        world.wakeUpAll();
+                        world.remove( attractor );
+                    }
+                });
+
+                world.add([
+                    Physics.behavior('newtonian', { strength: .01 })
+                    ,Physics.behavior('sweep-prune')
+                    ,Physics.behavior('body-collision-detection', { checkAll: false })
+                    ,Physics.behavior('body-impulse-response')
+                    ,edgeBounce
+                ]);
+
+                Physics.util.ticker.on(function( time ) {
                     world.step( time );
                 });
 
-                // start the ticker
                 Physics.util.ticker.start();
             }
         }
