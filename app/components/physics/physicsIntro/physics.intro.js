@@ -13,16 +13,22 @@ angular.module('ryanWeb').directive('physicsIntro', function() {
             scope.init();
         },
         controller: function($scope) {
+            var world;
+
             $scope.init = function() {
                 draw();
             };
+
+            $scope.$on('$destroy', function() {
+                world.destroy();
+            });
 
             function draw() {
                 var width = $('#physics').width();
                 var height = $('#physics').height();
                 var viewportBounds = Physics.aabb(0, 0, width, height);
 
-                var world = Physics({ sleepDisabled: true });
+                world = Physics({ sleepDisabled: true });
 
                 var renderer = Physics.renderer('canvas', {
                     el: 'physics'
