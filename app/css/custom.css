@@ -1,8 +1,3 @@
-.page-padding {padding-top: 40px;}
-.full-width {width: 100% !important;}
-.full-height {height: 100% !important;}
-.main-view {position:absolute; top: 40px; bottom:0; left:0; right:0; overflow-y:auto;}
-
 .horizontal.layout {
     display: flex;
     flex-direction: row;
@@ -21,9 +16,16 @@
     justify-content: center;
 }
 
+.vertical-scroll {
+    overflow-y: auto;
+}
+
 canvas {
     display: block;
 }
+
+.full-width {width: 100% !important;}
+.full-height {height: 100% !important;}
 
 .m0 {margin: 0 !important;}
 .m\-\- {margin: 5px !important;}

@@ -69,29 +69,29 @@ angular.module('ryanWeb').directive('physicsIntro', function() {
 
                 var attractor = Physics.behavior('attractor', {
                     order: 0,
-                    strength: .002
+                    strength: 0.002
                 });
                 world.on({
                     'interact:poke': function( pos ){
                         world.wakeUpAll();
                         attractor.position( pos );
                         world.add( attractor );
-                    }
-                    ,'interact:move': function( pos ){
+                    },
+                    'interact:move': function( pos ){
                         attractor.position( pos );
-                    }
-                    ,'interact:release': function(){
+                    },
+                    'interact:release': function(){
                         world.wakeUpAll();
                         world.remove( attractor );
                     }
                 });
 
                 world.add([
-                    Physics.behavior('newtonian', { strength: .01 })
-                    ,Physics.behavior('sweep-prune')
-                    ,Physics.behavior('body-collision-detection', { checkAll: false })
-                    ,Physics.behavior('body-impulse-response')
-                    ,edgeBounce
+                    Physics.behavior('newtonian', { strength: 0.01 }),
+                    Physics.behavior('sweep-prune'),
+                    Physics.behavior('body-collision-detection', { checkAll: false }),
+                    Physics.behavior('body-impulse-response'),
+                    edgeBounce
                 ]);
 
                 Physics.util.ticker.on(function( time ) {
