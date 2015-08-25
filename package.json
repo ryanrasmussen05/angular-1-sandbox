@@ -2,7 +2,8 @@
   "dependencies": {
     "angular": "~1",
     "angular-route": "~1",
-    "jquery": "latest"
+    "jquery": "latest",
+    "semantic-ui": "^2.0.8"
   },
   "devDependencies": {
     "browserify": "^10.2.4",
@@ -16,7 +17,7 @@
     "gulp-uglify": "^1.2.0"
   },
   "browser": {
-    "semantic-ui": "./app/lib/semantic-ui/semantic.js",
+    "semantic": "./app/lib/semantic/dist/semantic.js",
     "physicsjs": "./app/lib/physicsjs/physicsjs-full.js"
   },
   "browserify": {
@@ -26,7 +27,7 @@
   },
   "browserify-shim": {
     "jquery": "jQuery",
-    "semantic-ui": {
+    "semantic": {
       "depends": [
         "jquery:jQuery"
       ]
