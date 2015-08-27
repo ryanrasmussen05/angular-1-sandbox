@@ -3,11 +3,11 @@
 var Physics = require('physicsjs');
 var $ = require('jquery');
 
-angular.module('ryanWeb').directive('physicsIntroTwo', function() {
+angular.module('ryanWeb').directive('solarSystem', function() {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'components/physics/physicsIntroTwo/physics.intro.two.html',
+        templateUrl: 'components/physics/solarSystem/solar.system.html',
         scope: {},
         link: function(scope) {
             scope.init();
@@ -28,7 +28,7 @@ angular.module('ryanWeb').directive('physicsIntroTwo', function() {
                 var height = $('#physics').height();
                 var xMin = (width / 2) - (height / 2);
                 var xMax = (width / 2) + (height / 2);
-                var gravityStrength = 0.1;
+                var gravityStrength = 0.01;
 
                 world = Physics({ sleepDisabled: true });
 
@@ -54,17 +54,23 @@ angular.module('ryanWeb').directive('physicsIntroTwo', function() {
 
                 var circles = [];
 
-                for(var counter = 0; counter < 50; counter++){
+                for(var counter = 0; counter < 200; counter++){
                     var circle = Physics.body('circle', {
                         x: random(xMin, xMax),
                         y: random(0, height),
-                        mass: 0.004467599,
-                        radius: 4,
-                        restitution: 0.99,
+                        mass: 0.0022337995,
+                        radius: 2,
                         styles: {
                             fillStyle: '#FF0000'
                         }
                     });
+
+                    if(width/2 - 15 < circle.state.pos.x && circle.state.pos.x < width/2 + 15) {
+                        circle.state.pos.x = circle.state.pos.x + 30;
+                    }
+                    if(height/2 - 15 < circle.state.pos.y && circle.state.pos.y < height/2 + 15) {
+                        circle.state.pos.y = circle.state.pos.y + 30;
+                    }
 
                     var vector = Physics.vector(circle.state.pos.x - width / 2,circle.state.pos.y - height / 2);
                     var orbitRadius = vector.norm();
@@ -87,7 +93,29 @@ angular.module('ryanWeb').directive('physicsIntroTwo', function() {
                 ]);
 
                 world.on('collisions:detected', function(data) {
-                    console.log(data.collisions[0].pos.x + ', ' + data.collisions[0].pos.y);
+                    for(var i = 0; i < data.collisions.length; i++) {
+                        var bodyA = data.collisions[i].bodyA;
+                        var bodyB = data.collisions[i].bodyB;
+
+                        var newBodyVolume = (4/3 * Math.PI * Math.pow(bodyA.radius, 3)) + (4/3 * Math.PI * Math.pow(bodyB.radius, 3));
+                        var newBodyRadius = Math.pow(((3 / (4 * Math.PI)) * newBodyVolume), 1/3);
+
+                        var newBody = Physics.body('circle', {
+                            x: bodyA.state.pos.x + data.collisions[i].pos.x,
+                            y: bodyA.state.pos.y + data.collisions[i].pos.y,
+                            vx: bodyA.state.vel.x,
+                            vy: bodyA.state.vel.y,
+                            mass: bodyA.mass + bodyB.mass,
+                            radius: newBodyRadius,
+                            styles: {
+                                fillStyle: '#FF0000'
+                            }
+                        });
+
+                        world.add(newBody);
+                        world.remove(bodyA);
+                        world.remove(bodyB);
+                    }
                 });
 
                 Physics.util.ticker.on(function( time ) {
