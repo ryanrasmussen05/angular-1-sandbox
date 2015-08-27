@@ -31,5 +31,6 @@ require('./components/airplaneQuiz/airplane.quiz');
 require('./components/canvas/fireworks/fireworks');
 require('./components/canvas/particles/particles');
 require('./components/physics/physicsIntro/physics.intro');
+require('./components/physics/physicsIntroTwo/physics.intro.two');
 require('./components/resume/resume');
 
