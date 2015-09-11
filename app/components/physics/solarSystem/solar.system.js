@@ -13,6 +13,9 @@ angular.module('ryanWeb').directive('solarSystem', function() {
             scope.init();
         },
         controller: function($scope) {
+            $scope.solarSystem = {};
+            $scope.solarSystem.bodies = 0;
+
             var world;
 
             $scope.init = function() {
@@ -58,7 +61,8 @@ angular.module('ryanWeb').directive('solarSystem', function() {
                     var circle = Physics.body('circle', {
                         x: random(xMin, xMax),
                         y: random(0, height),
-                        mass: 0.0022337995,
+                        //mass: 0.0022337995,
+                        mass: 0.1,
                         radius: 2,
                         styles: {
                             fillStyle: '#FF0000'
@@ -120,6 +124,7 @@ angular.module('ryanWeb').directive('solarSystem', function() {
 
                 Physics.util.ticker.on(function( time ) {
                     world.step( time );
+                    updateBodyCount();
                 });
 
                 Physics.util.ticker.start();
@@ -127,6 +132,11 @@ angular.module('ryanWeb').directive('solarSystem', function() {
 
             function random(min, max) {
                 return (Math.random() * (max - min)) + min;
+            }
+
+            function updateBodyCount() {
+                $scope.solarSystem.bodies = world.getBodies().length;
+                $scope.$apply();
             }
         }
     };
