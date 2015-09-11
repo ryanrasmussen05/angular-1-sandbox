@@ -3,7 +3,7 @@
     "angular": "~1",
     "angular-route": "~1",
     "jquery": "latest",
-    "semantic-ui": "^2.0.8"
+    "semantic-ui": "latest"
   },
   "devDependencies": {
     "browserify": "^10.2.4",
