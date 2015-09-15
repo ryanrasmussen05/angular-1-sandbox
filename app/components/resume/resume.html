@@ -1,148 +1,60 @@
-<div class="ui page grid m0">
-    <div class="row">
-        <div class="column">
-            <h3 class="ui center aligned icon header m0">
-                <i class="suitcase icon"></i>
-                <div class="content">Employment</div>
-            </h3>
+<div class="ui container mt">
+    <h2 class="ui center aligned huge block header">
+        <div class="content">
+            <i class="suitcase icon"></i>
+            Employment
         </div>
-    </div>
-    <div class="sixteen wide column">
-        <div class="ui segment">
-            <div class="ui items">
-                <div class="item">
-                    <div class="ui small image">
-                        <img src="images/resume/aviture.png">
-                    </div>
-                    <div class="content">
-                        <h3 class="ui header">Software Engineer</h3>
-                        <h4 class="ui header">Aviture - Omaha, NE
-                            <div class="sub header">July 2014 - Present</div>
-                        </h4>
-                        <ul class="ui list">
-                            <li>Work with an Agile team of developers on both client-side and server-side of several web applications</li>
-                            <li>Technologies utilized include: AngularJS, Spring MVC, Web Sockets, Cesium, Gulp, Browserify, Karma</li>
-                            <li>Work with UX Designers to create GUIs while gaining expertise in front-end frameworks such as Semantic-UI and Bootstrap</li>
-                            <li>Serve as rotating sprint lead, coordinating meetings and leading sprint retrospectives</li>
-                        </ul>
+    </h2>
+    <div class="ui divided items">
+        <div class="item" ng-repeat="job in resume.jobs">
+            <div class="image">
+                <img ng-src="{{ job.image }}">
+            </div>
+            <div class="content pt pb">
+                <div>
+                    <h3 class="ui header">{{ job.title }}</h3>
+                </div>
+                <div>
+                    <strong>{{ job.company }}</strong>,
+                    <span>{{ job.location }}</span>
+                </div>
+                <div>
+                    <i>{{ job.start + ' - ' + job.end }}</i>
+                </div>
+                <div class="description ui bulleted list">
+                    <div class="item" ng-repeat="bullet in job.bullets">
+                        {{ bullet }}
                     </div>
                 </div>
             </div>
         </div>
     </div>
-    <div class="sixteen wide column">
-        <div class="ui segment">
-            <div class="ui items">
-                <div class="item">
-                    <div class="ui small image">
-                        <img src="images/resume/lockheed.png">
-                    </div>
-                    <div class="content">
-                        <h3 class="ui header">Software Engineer</h3>
-                        <h4 class="ui header">Lockheed Martin - Papillion, NE
-                            <div class="sub header">June 2013 - July 2014</div>
-                        </h4>
-                        <ul class="ui list">
-                            <li>Java/Web Developer on the Global Adaptive Planning Collaborative Information Environment (GAP CIE) contract</li>
-                            <li>GAP CIE consists of several Java services implementing Spring, Hibernate, GWT, JSP, and Javascript</li>
-                            <li>Develop and debug code using Eclipse, Oracle WebLogic Server, and SQL Developer</li>
-                            <li>Work bugs and new features as assigned, as well as working with Systems Engineers to develop requirements and technical approaches</li>
-                            <li>Participate on both Agile and Waterfall teams</li>
-                        </ul>
-                    </div>
-                </div>
+    <h2 class="ui center aligned huge block header">
+        <div class="content">
+            <i class="student icon"></i>
+            Education
+        </div>
+    </h2>
+    <div class="ui divided items">
+        <div class="item" ng-repeat="school in resume.schools">
+            <div class="image">
+                <img ng-src="{{ school.image }}">
             </div>
-        </div>
-    </div>
-    <div class="sixteen wide column">
-        <div class="ui segment">
-            <div class="ui items">
-                <div class="item">
-                    <div class="ui small image">
-                        <img src="images/resume/nebraskaglobal.png">
-                    </div>
-                    <div class="content">
-                        <h3 class="ui header">Software Engineer Intern</h3>
-                        <h4 class="ui header">Nebraska Global - Lincoln, NE
-                            <div class="sub header">August 2012 - May 2013</div>
-                        </h4>
-                        <ul class="ui list">
-                            <li>Worked on an individual project to develop an internal application used by software start-up EliteForm</li>
-                            <li>Developed an MVC web application using C# .NET and Visual Studio which gathers user metrics from the EliteForm database using Entity Framework and standard SQL queries</li>
-                            <li>Developed UI to cleanly present gathered information</li>
-                        </ul>
-                    </div>
+            <div class="content pt pb">
+                <h3 class="ui header">{{ school.degree }}</h3>
+                <h3 class="ui header" ng-if="school.minor">, {{ school.minor }}</h3>
+                <div class="mt">
+                    <div class="ui small header">{{ school.name }}</div>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="sixteen wide column">
-        <div class="ui segment">
-            <div class="ui items">
-                <div class="item">
-                    <div class="ui small image">
-                        <img src="images/resume/duncanaviation.png">
-                    </div>
-                    <div class="content">
-                        <h3 class="ui header">Web Development Intern</h3>
-                        <h4 class="ui header">Duncan Aviation - Lincoln, NE
-                            <div class="sub header">December 2011 - August 2012</div>
-                        </h4>
-                        <ul class="ui list">
-                            <li>Worked with a team of developers to convert Duncan Aviation's myDuncan website into a mobile web application using the Responsive Web Design approach</li>
-                            <li>Gained in-depth experience with Java, JSF, HTML, and CSS</li>
-                        </ul>
-                    </div>
+                <div>
+                    <span>{{ school.location }}</span>
                 </div>
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div class="column">
-            <h3 class="ui center aligned icon header m0">
-                <i class="student icon"></i>
-                <div class="content">Education</div>
-            </h3>
-        </div>
-    </div>
-    <div class="sixteen wide column">
-        <div class="ui segment">
-            <div class="ui items">
-                <div class="item">
-                    <div class="ui small image">
-                        <img src="images/resume/unl.png">
+                <div class="description ui bulleted list">
+                    <div class="item">
+                        Graduated {{ school.gradDate }}
                     </div>
-                    <div class="content">
-                        <h3 class="ui header">University of Nebraska</h3>
-                        <h4 class="ui header">Lincoln, NE
-                            <div class="sub header">August 2011 - May 2013</div>
-                        </h4>
-                        <div class="ui list">
-                            <div class="item">B.S. Computer Science</div>
-                            <div class="item">GPA: 3.96</div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
-    <div class="sixteen wide column">
-        <div class="ui segment">
-            <div class="ui items">
-                <div class="item">
-                    <div class="ui small image">
-                        <img src="images/resume/wsc.png">
-                    </div>
-                    <div class="content">
-                        <h3 class="ui header">Wayne State College</h3>
-                        <h4 class="ui header">Wayne, NE
-                            <div class="sub header">August 2005 - May 2009</div>
-                        </h4>
-                        <div class="ui list">
-                            <div class="item">B.S. Applied Mathematics</div>
-                            <div class="item">Minor: Physics</div>
-                            <div class="item">GPA: 3.97</div>
-                        </div>
+                    <div class="item">
+                        GPA: {{ school.gpa }}
                     </div>
                 </div>
             </div>
