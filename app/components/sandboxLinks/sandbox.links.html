@@ -1,0 +1,23 @@
+<div class="ui text container">
+    <h2 class="ui header mb0">Sandbox</h2>
+    <div class="ui small message pt-- pb--">*These items were created with <strong>Google Chrome</strong> and may not be performant in other browsers</div>
+    <div class="ui divided list">
+        <div class="item pt pb" ng-repeat="category in sandboxLinks.categories">
+            <i class="large icon" ng-class="category.icon"></i>
+            <div class="content">
+                <div class="header">{{ category.title }}</div>
+                <div class="description">{{ category.description }}</div>
+                <div class="list">
+                    <div class="item pt pb" ng-repeat="page in category.pages">
+                        <div class="content">
+                            <a class="header" ng-href="{{ page.link }}">{{ page.title }}</a>
+                            <div class="description">
+                                {{ page.description }}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
