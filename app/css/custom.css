@@ -9,7 +9,11 @@
 }
 
 .flex {
-    flex: 1;
+    flex: 1 0 auto;
+}
+
+.flex-no-shrink {
+    flex-shrink: 0;
 }
 
 .centered {
