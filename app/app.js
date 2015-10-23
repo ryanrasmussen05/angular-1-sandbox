@@ -30,8 +30,11 @@ app.config(['$routeProvider', function($routeProvider) {
 require('./components/airplaneQuiz/airplane.quiz');
 require('./components/canvas/fireworks/fireworks');
 require('./components/canvas/particles/particles');
+require('./components/physics/bridge/bridge');
+require('./components/physics/particlesTwo/particles.two');
 require('./components/physics/physicsIntro/physics.intro');
 require('./components/physics/solarSystem/solar.system');
+require('./components/physics/verlet/verlet');
 require('./components/resume/resume');
 require('./components/sandboxLinks/sandbox.links');
 
