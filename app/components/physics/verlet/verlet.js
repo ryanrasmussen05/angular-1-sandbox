@@ -53,7 +53,7 @@ angular.module('ryanWeb').directive('verlet', function() {
 
                 // the "basket"
                 var basket = [];
-                for (var i = 200; i < renderer.width - 200; i += 20){
+                for (var i = 400; i < renderer.width - 400; i += 20){
                     var basketLength = basket.push(
                         Physics.body('circle', {
                             x: i,

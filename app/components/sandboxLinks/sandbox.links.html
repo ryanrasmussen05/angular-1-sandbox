@@ -8,14 +8,11 @@
                 <div class="header">{{ category.title }}</div>
                 <div class="description">{{ category.description }}</div>
                 <div class="list">
-                    <div class="item pt pb" ng-repeat="page in category.pages">
-                        <div class="content">
-                            <a class="header" ng-href="{{ page.link }}">{{ page.title }}</a>
-                            <div class="description">
-                                {{ page.description }}
-                            </div>
-                        </div>
-                    </div>
+                    <ul class="ui list">
+                        <li ng-repeat="page in category.pages">
+                            <a ng-href="{{ page.link }}">{{ page.title }}</a>
+                        </li>
+                    </ul>
                 </div>
             </div>
         </div>

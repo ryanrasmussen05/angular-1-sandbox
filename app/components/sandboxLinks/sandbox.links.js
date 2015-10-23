@@ -17,12 +17,10 @@ angular.module('ryanWeb').directive('sandboxLinks', function() {
                     pages: [
                         {
                             title: 'Particles',
-                            description: 'Animation of colliding circles, manually updating positions using vector calculation and conservation of momentum',
                             link: '#/canvas/particles'
                         },
                         {
                             title: 'Fireworks',
-                            description: 'Fireworks simulation, calculating change in trajectory due to gravity and random particle burst',
                             link: '#/canvas/fireworks'
                         }
                     ]
@@ -33,14 +31,24 @@ angular.module('ryanWeb').directive('sandboxLinks', function() {
                     description: 'Experimenting with the new Physics JS library',
                     pages: [
                         {
-                            title: 'Intro',
-                            description: 'Initial test of the Physics library, shows Newtonian behaviour of a random scattering of particles',
+                            title: 'Newtonian Intro',
                             link: '#/physics/intro'
                         },
                         {
+                            title: 'Particles II',
+                            link: '#/physics/particlesTwo'
+                        },
+                        {
                             title: 'Solar System',
-                            description: 'Simulation of the formation of a solar system, with a sun in the center and particles orbiting and aggregating into planets',
                             link: '#/physics/solarSystem'
+                        },
+                        {
+                            title: 'Verlet Constraints Rubber Band',
+                            link: '#/physics/verlet'
+                        },
+                        {
+                            title: 'Bridge Test',
+                            link: '#/physics/bridge'
                         }
                     ]
                 }
