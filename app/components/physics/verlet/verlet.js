@@ -41,9 +41,9 @@ angular.module('ryanWeb').directive('verlet', function() {
 
                 // constrain objects to these bounds
                 var edgeBounce = Physics.behavior('edge-collision-detection', {
-                    aabb: viewportBounds
-                    ,restitution: 0.2
-                    ,cof: 0.8
+                    aabb: viewportBounds,
+                    restitution: 0.2,
+                    cof: 0.8
                 });
 
                 // for constraints
@@ -53,14 +53,14 @@ angular.module('ryanWeb').directive('verlet', function() {
 
                 // the "basket"
                 var basket = [];
-                for (var i = 200; i < Math.min(renderer.width - 200, 1000); i += 10){
+                for (var i = 200; i < renderer.width - 200; i += 20){
                     var basketLength = basket.push(
                         Physics.body('circle', {
                             x: i,
                             y: renderer.height / 2,
                             radius: 1,
                             restitution: 0.2,
-                            mass: .1,
+                            mass: 0.1,
                             hidden: true
                         })
                     );
@@ -74,8 +74,8 @@ angular.module('ryanWeb').directive('verlet', function() {
                     boxes.push( Physics.body('circle', {
                         radius: 50,
                         mass: 0.001,
-                        x: 60 * (i % 6) + renderer.width / 2 - (300),
-                        y: 60 * (i / 6 | 0) + 50,
+                        x: (60 * i) + renderer.width / 2 - (300),
+                        y: 100,
                         restitution: 0.9,
                         styles: {
                             fillStyle: '#000099',
@@ -113,11 +113,11 @@ angular.module('ryanWeb').directive('verlet', function() {
                         world.wakeUpAll();
                         attractor.position( pos );
                         world.add( attractor );
-                    }
-                    ,'interact:move': function( pos ){
+                    },
+                    'interact:move': function( pos ){
                         attractor.position( pos );
-                    }
-                    ,'interact:release': function(){
+                    },
+                    'interact:release': function(){
                         world.wakeUpAll();
                         world.remove( attractor );
                     }
@@ -125,12 +125,12 @@ angular.module('ryanWeb').directive('verlet', function() {
 
                 // add things to the world
                 world.add([
-                    Physics.behavior('interactive', { el: renderer.el })
-                    ,Physics.behavior('constant-acceleration')
-                    ,Physics.behavior('body-impulse-response')
-                    ,Physics.behavior('body-collision-detection')
-                    ,Physics.behavior('sweep-prune')
-                    ,edgeBounce
+                    Physics.behavior('interactive', { el: renderer.el }),
+                    Physics.behavior('constant-acceleration'),
+                    Physics.behavior('body-impulse-response'),
+                    Physics.behavior('body-collision-detection'),
+                    Physics.behavior('sweep-prune'),
+                    edgeBounce
                 ]);
 
                 // subscribe to ticker to advance the simulation
