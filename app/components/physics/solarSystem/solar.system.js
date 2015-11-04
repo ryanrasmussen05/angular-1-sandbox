@@ -50,6 +50,7 @@ angular.module('ryanWeb').directive('solarSystem', function() {
                     mass: 333,
                     radius: 20,
                     treatment: 'static',
+                    sun: true,
                     styles: {
                         fillStyle: '#0000FF'
                     }
@@ -109,30 +110,36 @@ angular.module('ryanWeb').directive('solarSystem', function() {
                         var bodyA = data.collisions[i].bodyA;
                         var bodyB = data.collisions[i].bodyB;
 
-                        var newBodyVolume = (4/3 * Math.PI * Math.pow(bodyA.radius, 3)) + (4/3 * Math.PI * Math.pow(bodyB.radius, 3));
-                        var newBodyRadius = Math.pow(((3 / (4 * Math.PI)) * newBodyVolume), 1/3);
+                        if(bodyA.sun) {
+                            world.remove(bodyB);
+                        } else if(bodyB.sun) {
+                            world.remove(bodyA);
+                        } else {
+                            var newBodyVolume = (4/3 * Math.PI * Math.pow(bodyA.radius, 3)) + (4/3 * Math.PI * Math.pow(bodyB.radius, 3));
+                            var newBodyRadius = Math.pow(((3 / (4 * Math.PI)) * newBodyVolume), 1/3);
 
-                        var centerOfMass = Physics.body.getCOM([bodyA, bodyB]);
+                            var centerOfMass = Physics.body.getCOM([bodyA, bodyB]);
 
-                        var centerOfMassVelocity = {};
-                        centerOfMassVelocity.x = ((bodyA.mass * bodyA.state.vel.x) + (bodyB.mass * bodyB.state.vel.x)) / (bodyA.mass + bodyB.mass);
-                        centerOfMassVelocity.y = ((bodyA.mass * bodyA.state.vel.y) + (bodyB.mass * bodyB.state.vel.y)) / (bodyA.mass + bodyB.mass);
+                            var centerOfMassVelocity = {};
+                            centerOfMassVelocity.x = ((bodyA.mass * bodyA.state.vel.x) + (bodyB.mass * bodyB.state.vel.x)) / (bodyA.mass + bodyB.mass);
+                            centerOfMassVelocity.y = ((bodyA.mass * bodyA.state.vel.y) + (bodyB.mass * bodyB.state.vel.y)) / (bodyA.mass + bodyB.mass);
 
-                        var newBody = Physics.body('circle', {
-                            x: centerOfMass.x,
-                            y: centerOfMass.y,
-                            vx: centerOfMassVelocity.x,
-                            vy: centerOfMassVelocity.y,
-                            mass: bodyA.mass + bodyB.mass,
-                            radius: newBodyRadius,
-                            styles: {
-                                fillStyle: '#FF0000'
-                            }
-                        });
+                            var newBody = Physics.body('circle', {
+                                x: centerOfMass.x,
+                                y: centerOfMass.y,
+                                vx: centerOfMassVelocity.x,
+                                vy: centerOfMassVelocity.y,
+                                mass: bodyA.mass + bodyB.mass,
+                                radius: newBodyRadius,
+                                styles: {
+                                    fillStyle: '#FF0000'
+                                }
+                            });
 
-                        world.add(newBody);
-                        world.remove(bodyA);
-                        world.remove(bodyB);
+                            world.add(newBody);
+                            world.remove(bodyA);
+                            world.remove(bodyB);
+                        }
                     }
                 });
 
