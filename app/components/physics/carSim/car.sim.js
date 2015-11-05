@@ -5,11 +5,11 @@ var $ = require('jquery');
 require('../../../physics/behavior/torque');
 require('../../../physics/body/beam');
 
-angular.module('ryanWeb').directive('car', function() {
+angular.module('ryanWeb').directive('carSim', function() {
     return {
         restrict: 'E',
         replace: true,
-        templateUrl: 'components/physics/car/car.html',
+        templateUrl: 'components/physics/carSim/car.sim.html',
         scope: {},
         link: function(scope) {
             scope.init();
@@ -18,10 +18,12 @@ angular.module('ryanWeb').directive('car', function() {
             var world;
             var width;
             var height;
+            var renderer;
 
             $scope.init = function() {
                 setupWorld();
-                draw();
+                drawRoad();
+                drawCar();
             };
 
             $scope.$on('$destroy', function() {
@@ -42,11 +44,11 @@ angular.module('ryanWeb').directive('car', function() {
                     Physics.behavior('edge-collision-detection', {
                         aabb: Physics.aabb(0, 0, width, height),
                         restitution: 0.0,
-                        cof: 1.0
+                        cof: 0
                     })
                 ]);
 
-                var renderer = Physics.renderer('canvas', {el: 'physics'});
+                renderer = Physics.renderer('canvas', {el: 'physics'});
                 world.add(renderer);
 
                 world.on('step', function() {
@@ -60,7 +62,7 @@ angular.module('ryanWeb').directive('car', function() {
                 Physics.util.ticker.start();
             }
 
-            function draw() {
+            function drawRoad() {
                 var y = height * 0.9;
 
                 for(var x = 0; x < width; x+=100) {
@@ -85,16 +87,40 @@ angular.module('ryanWeb').directive('car', function() {
 
                     world.add(roadSection);
                 }
+            }
 
-                var myWheel = Physics.body('circle', {
-                    x: 100,
-                    y: 100,
-                    radius: 60,
+            function drawCar() {
+                var wheels = [];
+
+                wheels.push(Physics.body('circle', {
+                    x: 50,
+                    y: 50,
+                    radius: 30,
                     cof: 1.0
+                }));
+
+                wheels.push(Physics.body('circle', {
+                    x: 150,
+                    y: 50,
+                    radius: 30,
+                    cof: 1.0
+                }));
+
+                var rigidConstraints = Physics.behavior('verlet-constraints', {
+                    iterations: 3
                 });
 
-                world.add(Physics.behavior('torque').applyTo([myWheel]));
-                world.add(myWheel);
+                rigidConstraints.distanceConstraint(wheels[0], wheels[1], 1);
+
+                world.on('render', function(){
+                    var constraint = rigidConstraints.getConstraints().distanceConstraints[0];
+                    renderer.drawLine(constraint.bodyA.state.pos, constraint.bodyB.state.pos, 'rgba(0, 0, 0, 1.0)');
+                });
+
+
+                world.add(Physics.behavior('torque', {torque: 0.05}).applyTo(wheels));
+                world.add(wheels);
+                world.add(rigidConstraints);
             }
         }
     };

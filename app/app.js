@@ -31,7 +31,7 @@ require('./components/airplaneQuiz/airplane.quiz');
 require('./components/canvas/fireworks/fireworks');
 require('./components/canvas/particles/particles');
 require('./components/physics/bridge/bridge');
-require('./components/physics/car/car');
+require('./components/physics/carSim/car.sim');
 require('./components/physics/particlesTwo/particles.two');
 require('./components/physics/physicsIntro/physics.intro');
 require('./components/physics/solarSystem/solar.system');

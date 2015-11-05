@@ -55,7 +55,7 @@ angular.module('ryanWeb').directive('bridge', function() {
                 var edgeBounce = Physics.behavior('edge-collision-detection', {
                     aabb: viewportBounds,
                     restitution: 0.1,
-                    cof: 0.8
+                    cof: 1.0
                 });
 
                 // for constraints
@@ -72,6 +72,7 @@ angular.module('ryanWeb').directive('bridge', function() {
                         y: height / 2,
                         radius: 1,
                         mass: 0.5,
+                        cof: 1.0,
                         hidden: true
                     });
                     bridgeLevelOne.push(bridgeNode);
@@ -84,6 +85,7 @@ angular.module('ryanWeb').directive('bridge', function() {
                         y: height / 2 + bridgeSpacing,
                         radius: 1,
                         mass: 1,
+                        cof: 1.0,
                         hidden: true
                     });
                     bridgeLevelTwo.push(bridgeNode);
