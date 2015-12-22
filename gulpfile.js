@@ -4,18 +4,25 @@ var gulp = require('gulp'),
     concat = require('gulp-concat'),
     uglify = require('gulp-uglify'),
     ngAnnotate = require('gulp-ng-annotate'),
-    sass = require('gulp-sass');
+    sass = require('gulp-sass'),
+    del = require('del'),
+    runSequence = require('run-sequence');
+
+//clean build files
+gulp.task('clean', function() {
+    return del(['./app/bundle.js', './app/style.css']);
+});
 
 //JSHint task
 gulp.task('lint', function() {
-    gulp.src('./app/components/**/*.js')
+    return gulp.src('./app/components/**/*.js')
     .pipe(jshint())
     .pipe(jshint.reporter('default'));
 });
 
 //Browserify task
 gulp.task('build-dev', function() {
-    gulp.src(['app/app.js'])
+    return gulp.src(['app/app.js'])
     .pipe(browserify({
             insertGlobals: true,
             debug: true
@@ -27,7 +34,7 @@ gulp.task('build-dev', function() {
 });
 
 gulp.task('build-prod', function() {
-    gulp.src(['app/app.js'])
+    return gulp.src(['app/app.js'])
         .pipe(browserify({
             insertGlobals: true,
             debug: false
@@ -44,15 +51,14 @@ gulp.task('build-prod', function() {
 
 //compile sass
 gulp.task('build-sass', function() {
-    gulp.src('./app/styles/style.scss')
+    return gulp.src('./app/styles/style.scss')
         .pipe(sass().on('error', sass.logError))
-        .pipe(gulp.dest('./app'));
+        .pipe(gulp.dest('app'));
 });
 
 gulp.task('watch', ['lint'], function() {
     //Watch script files for changes
     gulp.watch(['app/components/**/*.js'], [
-        'lint',
         'build-dev'
     ]);
     gulp.watch(['app/**/*.scss'], [
@@ -61,7 +67,11 @@ gulp.task('watch', ['lint'], function() {
 });
 
 //build for dev
-gulp.task('build', ['lint', 'build-sass', 'build-dev']);
+gulp.task('build', function(callback) {
+    runSequence(['clean'], ['lint'], ['build-sass', 'build-dev'], callback);
+});
 
 //build for deploy
-gulp.task('deploy', ['lint', 'build-sass', 'build-prod']);
+gulp.task('deploy', function(callback) {
+    runSequence(['clean'], ['lint'], ['build-sass', 'build-prod'], callback);
+});
