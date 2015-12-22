@@ -1,0 +1,290 @@
+.horizontal.layout {
+  display: flex;
+  flex-direction: row; }
+
+.vertical.layout {
+  display: flex;
+  flex-direction: column; }
+
+.flex {
+  flex: 1 0 auto; }
+
+.flex-no-shrink {
+  flex-shrink: 0; }
+
+.centered {
+  justify-content: center; }
+
+.vertical-scroll {
+  overflow-y: auto; }
+
+canvas {
+  display: block; }
+
+.banner-padding {
+  padding-top: 75px !important;
+  padding-bottom: 75px !important; }
+
+.full-width {
+  width: 100% !important; }
+
+.full-height {
+  height: 100% !important; }
+
+.m0 {
+  margin: 0 !important; }
+
+.m\-\- {
+  margin: 5px !important; }
+
+.m\- {
+  margin: 10px !important; }
+
+.m {
+  margin: 15px !important; }
+
+.m\+ {
+  margin: 20px !important; }
+
+.m\+\+ {
+  margin: 25px !important; }
+
+.mt0 {
+  margin-top: 0 !important; }
+
+.mt\-\- {
+  margin-top: 5px !important; }
+
+.mt\- {
+  margin-top: 10px !important; }
+
+.mt {
+  margin-top: 15px !important; }
+
+.mt\+ {
+  margin-top: 20px !important; }
+
+.mt\+\+ {
+  margin-top: 25px !important; }
+
+.mb0 {
+  margin-bottom: 0 !important; }
+
+.mb\-\- {
+  margin-bottom: 5px !important; }
+
+.mb\- {
+  margin-bottom: 10px !important; }
+
+.mb {
+  margin-bottom: 15px !important; }
+
+.mb\+ {
+  margin-bottom: 20px !important; }
+
+.mb\+\+ {
+  margin-bottom: 25px !important; }
+
+.ml0 {
+  margin-left: 0 !important; }
+
+.ml\-\- {
+  margin-left: 5px !important; }
+
+.ml\- {
+  margin-left: 10px !important; }
+
+.ml {
+  margin-left: 15px !important; }
+
+.ml\+ {
+  margin-left: 20px !important; }
+
+.ml\+\+ {
+  margin-left: 25px !important; }
+
+.mr0 {
+  margin-right: 0 !important; }
+
+.mr\-\- {
+  margin-right: 5px !important; }
+
+.mr\- {
+  margin-right: 10px !important; }
+
+.mr {
+  margin-right: 15px !important; }
+
+.mr\+ {
+  margin-right: 20px !important; }
+
+.mr\+\+ {
+  margin-right: 25px !important; }
+
+.p0 {
+  padding: 0 !important; }
+
+.p\-\- {
+  padding: 5px !important; }
+
+.p\- {
+  padding: 10px !important; }
+
+.p {
+  padding: 15px !important; }
+
+.p\+ {
+  padding: 20px !important; }
+
+.p\+\+ {
+  padding: 25px !important; }
+
+.pt0 {
+  padding-top: 0 !important; }
+
+.pt\-\- {
+  padding-top: 5px !important; }
+
+.pt\- {
+  padding-top: 10px !important; }
+
+.pt {
+  padding-top: 15px !important; }
+
+.pt\+ {
+  padding-top: 20px !important; }
+
+.pt\+\+ {
+  padding-top: 25px !important; }
+
+.pb0 {
+  padding-bottom: 0 !important; }
+
+.pb\-\- {
+  padding-bottom: 5px !important; }
+
+.pb\- {
+  padding-bottom: 10px !important; }
+
+.pb {
+  padding-bottom: 15px !important; }
+
+.pb\+ {
+  padding-bottom: 20px !important; }
+
+.pb\+\+ {
+  padding-bottom: 25px !important; }
+
+.pl0 {
+  padding-left: 0 !important; }
+
+.pl\-\- {
+  padding-left: 5px !important; }
+
+.pl\- {
+  padding-left: 10px !important; }
+
+.pl {
+  padding-left: 15px !important; }
+
+.pl\+ {
+  padding-left: 20px !important; }
+
+.pl\+\+ {
+  padding-left: 25px !important; }
+
+.pr0 {
+  padding-right: 0 !important; }
+
+.pr\-\- {
+  padding-right: 5px !important; }
+
+.pr\- {
+  padding-right: 10px !important; }
+
+.pr {
+  padding-right: 15px !important; }
+
+.pr\+ {
+  padding-right: 20px !important; }
+
+.pr\+\+ {
+  padding-right: 25px !important; }
+
+/*colors taken from semantic css*/
+.black {
+  background-color: #1B1C1D; }
+
+.blue {
+  background-color: #3B83C0; }
+
+.green {
+  background-color: #5BBD72; }
+
+.grey {
+  background-color: #CCCCCC; }
+
+.orange {
+  background-color: #E07B53; }
+
+.pink {
+  background-color: #D9499A; }
+
+.purple {
+  background-color: #564F8A; }
+
+.red {
+  background-color: #D95C5C; }
+
+.teal {
+  background-color: #00B5AD; }
+
+.yellow {
+  background-color: #F2C61F; }
+
+/*---  Light Colors  ---*/
+.lightBlack {
+  background-color: #333333; }
+
+.lightBlue {
+  background-color: #54C8FF; }
+
+.lightGreen {
+  background-color: #2ECC40; }
+
+.lightOrange {
+  background-color: #FF851B; }
+
+.lightPink {
+  background-color: #FF8EDF; }
+
+.lightPurple {
+  background-color: #CDC6FF; }
+
+.lightRed {
+  background-color: #FF695E; }
+
+.lightTeal {
+  background-color: #6DFFFF; }
+
+.lightYellow {
+  background-color: #FFE21F; }
+
+/*---   Neutrals  ---*/
+.fullBlack {
+  background-color: #000000; }
+
+.darkGrey {
+  background-color: #AAAAAA; }
+
+.lightGrey {
+  background-color: #DCDDDE; }
+
+.offWhite {
+  background-color: #FAFAFA; }
+
+.darkWhite {
+  background-color: #F0F0F0; }
+
+.white {
+  background-color: #FFFFFF; }
