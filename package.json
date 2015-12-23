@@ -2,8 +2,7 @@
   "dependencies": {
     "angular": "^1.4.8",
     "angular-route": "^1.4.8",
-    "jquery": "^2.1.4",
-    "semantic-ui": "^2.1.7"
+    "jquery": "^2.1.4"
   },
   "devDependencies": {
     "browserify": "^10.2.4",
@@ -20,7 +19,7 @@
     "run-sequence": "^1.1.5"
   },
   "browser": {
-    "semantic": "./app/lib/semantic/dist/semantic.js",
+    "semantic": "./app/lib/semantic-ui/semantic.js",
     "physicsjs": "./app/lib/physicsjs/physicsjs-full.js"
   },
   "browserify": {
