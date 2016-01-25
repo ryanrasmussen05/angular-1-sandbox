@@ -22,6 +22,9 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/airplaneQuiz', {
     templateUrl: 'views/lockheedQuiz.html'
 
+  }).when('/cesium', {
+    templateUrl: 'views/cesium.html'
+
   }).otherwise({
     redirectTo: '/home'
 })
@@ -30,6 +33,7 @@ app.config(['$routeProvider', function($routeProvider) {
 require('./components/airplaneQuiz/airplane.quiz');
 require('./components/canvas/fireworks/fireworks');
 require('./components/canvas/particles/particles');
+require('./components/cesium/cesium.map');
 require('./components/physics/bridge/bridge');
 require('./components/physics/carSim/car.sim');
 require('./components/physics/particlesTwo/particles.two');
