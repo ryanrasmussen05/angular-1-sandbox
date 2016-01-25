@@ -1,5 +1,5 @@
-<div class="flex vertical layout">
-    <div class="full-width darkGrey pb-- pt-- pl--">
+<div class="u-flexItemGrow u-flex u-flexColumn">
+    <div class="u-sizeFull darkGrey pb-- pt-- pl--">
         <div class="ui button" ng-class="{blue: canvasTest.gravity, red: !canvasTest.gravity}" ng-click="canvasTest.toggleGravity()">
             Turn Gravity {{canvasTest.gravity ? 'Off' : 'On'}}
         </div>
@@ -18,7 +18,7 @@
             </div>
         </div>
     </div>
-    <div class="canvas-wrapper flex">
+    <div class="canvas-wrapper u-flexItemGrow">
         <canvas id="canvas"></canvas>
     </div>
 </div>
