@@ -25,6 +25,9 @@ app.config(['$routeProvider', function($routeProvider) {
   }).when('/cesium', {
     templateUrl: 'views/cesium.html'
 
+  }).when('/montyHall', {
+    templateUrl: 'views/montyHall.html'
+
   }).otherwise({
     redirectTo: '/home'
 })
@@ -34,6 +37,7 @@ require('./components/airplaneQuiz/airplane.quiz');
 require('./components/canvas/fireworks/fireworks');
 require('./components/canvas/particles/particles');
 require('./components/cesium/cesium.map');
+require('./components/montyHall/monty.hall');
 require('./components/physics/bridge/bridge');
 require('./components/physics/carSim/car.sim');
 require('./components/physics/particlesTwo/particles.two');

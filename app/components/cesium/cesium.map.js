@@ -6,10 +6,7 @@ angular.module('ryanWeb').directive('cesiumMap', function() {
         replace: true,
         templateUrl: 'components/cesium/cesium.map.html',
         scope: {},
-        link: function(scope) {
-            console.log('here');
-        },
-        controller: function($scope, $element) {
+        controller: function() {
             var viewer = new Cesium.Viewer('cesium');
         }
     };
