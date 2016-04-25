@@ -1,3 +1,4 @@
+/* jshint latedef: nofunc */
 'use strict';
 
 var Physics = require('physicsjs');

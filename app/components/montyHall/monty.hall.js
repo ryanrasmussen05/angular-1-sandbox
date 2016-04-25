@@ -3,6 +3,8 @@
 angular.module('ryanWeb').directive('montyHall', function() {
     var _ = require('lodash');
     var doors = [1,2,3];
+    var numberTests = 100;
+    var testSpeed = 10;
 
     return {
         restrict: 'E',
@@ -12,11 +14,12 @@ angular.module('ryanWeb').directive('montyHall', function() {
         link: function(scope) {
             scope.montyHall.reset();
         },
-        controller: function($scope) {
+        controller: function($scope, $timeout) {
             $scope.montyHall = {};
             $scope.montyHall.openDoors = [];
             $scope.montyHall.winningDoor = null;
             $scope.montyHall.selectedDoor = null;
+            $scope.montyHall.testResults = {winners: [], losers: []};
             $scope.montyHall.state = '';
 
             $scope.montyHall.randomWinner = function() {
@@ -28,6 +31,7 @@ angular.module('ryanWeb').directive('montyHall', function() {
                 $scope.montyHall.openDoors = [];
                 $scope.montyHall.state = 'initial';
                 $scope.montyHall.selectedDoor = null;
+                $scope.montyHall.testOutputs = [];
             };
 
             $scope.montyHall.openDoor = function(doorNumber) {
@@ -80,6 +84,51 @@ angular.module('ryanWeb').directive('montyHall', function() {
 
                 _.each(doors, $scope.montyHall.openDoor);
                 $scope.montyHall.state = 'gameOver';
+            };
+
+            $scope.montyHall.runTest = function(shouldSwitch, testNumber) {
+                $scope.montyHall.runningTest = true;
+
+                if(!testNumber) {
+                    testNumber = 1;
+                } else if(testNumber > numberTests) {
+                    $scope.montyHall.testResult = 'Won: ' + $scope.montyHall.testResults.winners.length + '    Lost: ' + $scope.montyHall.testResults.losers.length;
+                    $scope.montyHall.testResults = {winners: [], losers: []};
+                    $scope.montyHall.state = 'testCompleted';
+                    $scope.montyHall.runningTest = false;
+                    $scope.$apply();
+                    return;
+                }
+
+                $scope.montyHall.randomWinner();
+                $scope.montyHall.openDoors = [];
+                $scope.montyHall.state = 'initial';
+                $scope.montyHall.selectedDoor = null;
+
+                var randomSelection = Math.floor(Math.random() * 3) + 1;
+                $scope.montyHall.doorAction(randomSelection);
+
+                $timeout(function() {
+                    $scope.montyHall.openRandomLoser();
+                    $timeout(function() {
+                        $scope.montyHall.switch(shouldSwitch);
+                        $timeout(function() {
+                            $scope.montyHall.finish();
+
+                            var win = $scope.montyHall.selectedDoor === $scope.montyHall.winningDoor;
+
+                            if(win) {
+                                $scope.montyHall.testResults.winners.push(testNumber);
+                                $scope.montyHall.testOutputs.push('WIN');
+                            } else {
+                                $scope.montyHall.testResults.losers.push(testNumber);
+                                $scope.montyHall.testOutputs.push('LOSE');
+                            }
+
+                            $scope.montyHall.runTest(shouldSwitch, ++testNumber);
+                        }, testSpeed);
+                    }, testSpeed);
+                }, testSpeed);
             };
         }
     };

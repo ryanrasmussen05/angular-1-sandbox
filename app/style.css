@@ -4107,3 +4107,13 @@ canvas {
     background: url("images/montyHall/donkey.png") no-repeat center/cover; }
     .monty-hall .door.open.winner {
       background: url("images/montyHall/money.jpg") no-repeat center/cover; }
+
+.monty-hall .test-output {
+  display: inline-block;
+  margin-right: 20px;
+  margin-bottom: 10px;
+  font-size: 30px; }
+  .monty-hall .test-output.WIN {
+    color: green; }
+  .monty-hall .test-output.LOSE {
+    color: red; }

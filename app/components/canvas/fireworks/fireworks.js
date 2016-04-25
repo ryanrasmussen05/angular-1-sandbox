@@ -1,3 +1,4 @@
+/* jshint latedef: nofunc */
 'use strict';
 
 angular.module('ryanWeb').directive('fireworks', function() {

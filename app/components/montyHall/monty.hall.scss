@@ -19,4 +19,18 @@
       }
     }
   }
+
+  .test-output {
+    display: inline-block;
+    margin-right: 20px;
+    margin-bottom: 10px;
+    font-size: 30px;
+
+    &.WIN {
+      color: green;
+    }
+    &.LOSE {
+      color: red;
+    }
+  }
 }

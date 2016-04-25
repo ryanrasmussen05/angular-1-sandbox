@@ -1,8 +1,10 @@
 <div class="monty-hall u-flexItemGrow u-flex u-flexColumn">
-    <div class="u-flex u-flexCentered mt+">
-        <div class="ui button blue" ng-click="montyHall.reset()">
-            Reset
-        </div>
+    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state !== 'initial' && !montyHall.runningTest">
+        <div class="ui button blue" ng-click="montyHall.reset()">Reset</div>
+    </div>
+    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'initial'">
+        <div class="ui button blue" ng-click="montyHall.runTest(false)">Run 'Stay' Test</div>
+        <div class="ui button blue" ng-click="montyHall.runTest(true)">Run 'Switch' Test</div>
     </div>
 
     <div class="u-flex u-flexCentered mt++">
@@ -20,21 +22,29 @@
         </div>
     </div>
 
-    <div class="u-flex u-flexCentered mt" ng-if="montyHall.state == 'initial'">
-        <div>Choose a door</div>
-    </div>
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'openLoser'">
-        <div class="ui button blue" ng-click="montyHall.openRandomLoser()">Open Loser Door</div>
-    </div>
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'keepSwitch'">
-        <div class="ui button blue" ng-click="montyHall.switch(false)">Stay</div>
-        <div class="ui button blue" ng-click="montyHall.switch(true)">Switch</div>
-    </div>
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'reveal'">
-        <div class="ui button blue" ng-click="montyHall.finish()">Reveal</div>
+    <div ng-if="!montyHall.runningTest">
+        <div class="u-flex u-flexCentered mt" ng-if="montyHall.state == 'initial'">
+            <div>Choose a door</div>
+        </div>
+        <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'openLoser'">
+            <div class="ui button blue" ng-click="montyHall.openRandomLoser()">Open Loser Door</div>
+        </div>
+        <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'keepSwitch'">
+            <div class="ui button blue" ng-click="montyHall.switch(false)">Stay</div>
+            <div class="ui button blue" ng-click="montyHall.switch(true)">Switch</div>
+        </div>
+        <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'reveal'">
+            <div class="ui button blue" ng-click="montyHall.finish()">Reveal</div>
+        </div>
     </div>
 
     <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'gameOver'">
         {{montyHall.finishText}}
+    </div>
+    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'testCompleted'">
+        {{montyHall.testResult}}
+    </div>
+    <div class="mt+">
+        <span class="test-output" ng-repeat="result in montyHall.testOutputs track by $index" ng-class="result">{{result}}</span>
     </div>
 </div>

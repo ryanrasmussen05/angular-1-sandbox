@@ -1,3 +1,5 @@
+/* jshint unused: false */
+/* globals Cesium */
 'use strict';
 
 angular.module('ryanWeb').directive('cesiumMap', function() {
