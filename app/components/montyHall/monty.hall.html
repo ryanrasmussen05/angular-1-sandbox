@@ -1,13 +1,13 @@
 <div class="monty-hall u-flexItemGrow u-flex u-flexColumn">
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state !== 'initial' && !montyHall.runningTest">
+    <div class="u-flexItemNoShrink u-flex u-flexCentered mt+" ng-if="montyHall.state !== 'initial' && !montyHall.runningTest">
         <div class="ui button blue" ng-click="montyHall.reset()">Reset</div>
     </div>
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'initial'">
+    <div class="u-flexItemNoShrink u-flex u-flexCentered mt+" ng-if="montyHall.state == 'initial'">
         <div class="ui button blue" ng-click="montyHall.runTest(false)">Run 'Stay' Test</div>
         <div class="ui button blue" ng-click="montyHall.runTest(true)">Run 'Switch' Test</div>
     </div>
 
-    <div class="u-flex u-flexCentered mt++">
+    <div class="u-flexItemNoShrink u-flex u-flexCentered mt++">
         <div class="door mh u-flex u-flexCentered u-flexMiddle" ng-click="montyHall.doorAction(1)"
              ng-class="{'open': montyHall.isDoorOpen(1), 'winner': montyHall.winningDoor == 1, 'selected': montyHall.selectedDoor == 1}">
             <div ng-hide="montyHall.isDoorOpen(1)">1</div>
@@ -22,7 +22,7 @@
         </div>
     </div>
 
-    <div ng-if="!montyHall.runningTest">
+    <div class="u-flexItemNoShrink" ng-if="!montyHall.runningTest">
         <div class="u-flex u-flexCentered mt" ng-if="montyHall.state == 'initial'">
             <div>Choose a door</div>
         </div>
@@ -38,13 +38,13 @@
         </div>
     </div>
 
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'gameOver'">
+    <div class="u-flexItemNoShrink u-flex u-flexCentered mt+" ng-if="montyHall.state == 'gameOver'">
         {{montyHall.finishText}}
     </div>
-    <div class="u-flex u-flexCentered mt+" ng-if="montyHall.state == 'testCompleted'">
+    <div class="u-flexItemNoShrink u-flex u-flexCentered mt+" ng-if="montyHall.state == 'testCompleted'">
         {{montyHall.testResult}}
     </div>
-    <div class="mt+">
+    <div class="test-output-container u-flexItemGrow mt+ u-overflowScroll-y">
         <span class="test-output" ng-repeat="result in montyHall.testOutputs track by $index" ng-class="result">{{result}}</span>
     </div>
 </div>

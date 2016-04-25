@@ -4096,17 +4096,17 @@ canvas {
 
 .monty-hall .door {
   height: 250px;
-  width: 150px;
+  width: 175px;
   background-color: #00aced;
   font-weight: bold;
   font-size: 60px;
   cursor: pointer; }
   .monty-hall .door.selected {
     box-shadow: orange 0 0 11px 5px; }
-  .monty-hall .door.open {
-    background: url("images/montyHall/donkey.png") no-repeat center/cover; }
-    .monty-hall .door.open.winner {
-      background: url("images/montyHall/money.jpg") no-repeat center/cover; }
+  .monty-hall .door.open:not(.winner) {
+    background: url("images/montyHall/goat1.jpg") no-repeat center/cover; }
+  .monty-hall .door.open.winner {
+    background: url("images/montyHall/money.jpg") no-repeat center/cover; }
 
 .monty-hall .test-output {
   display: inline-block;

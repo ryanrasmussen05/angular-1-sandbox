@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('ryanWeb').directive('montyHall', function() {
+    var $ = require('jquery');
     var _ = require('lodash');
     var doors = [1,2,3];
-    var numberTests = 100;
-    var testSpeed = 10;
+    var numberTests = 1000;
+    var testSpeed = 2;
 
     return {
         restrict: 'E',
@@ -88,6 +89,7 @@ angular.module('ryanWeb').directive('montyHall', function() {
 
             $scope.montyHall.runTest = function(shouldSwitch, testNumber) {
                 $scope.montyHall.runningTest = true;
+                $('.test-output-container').scrollTop(100000);
 
                 if(!testNumber) {
                     testNumber = 1;
