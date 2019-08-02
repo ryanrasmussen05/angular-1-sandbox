@@ -1,11 +1,7 @@
-# ryan-web
+# AngularJS Profile/Sandbox Website
 
-AngularJS web application sandbox
+AngularJS web application sandbox, no longer maintained
 
-commands:
-firebase serve
-firebase deploy
-
-'gulp build' for local development
-'gulp deploy' for bundled and minified
+`gulp build` for local development
+`gulp deploy` for bundled and minified
 
